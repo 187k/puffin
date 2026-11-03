@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Puffin — A Happier Life for Every Paw</title>
+  <meta name="description" content="Puffin is a pet-care app for health tracking, vaccination reminders, daily activity and nearby vet clinics — all in one cheerful place.">
+  <meta name="theme-color" content="#FBF1E2">
+  <meta property="og:title" content="Puffin — A Happier Life for Every Paw">
+  <meta property="og:description" content="Health tracking, vaccine reminders, daily activity and nearby vets for your pets, in one app.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Gluten:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<!-- ============ SVG sprite: filters, doodles, icons ============ -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- "line boil": makes doodles jitter like hand-drawn animation -->
+    <filter id="boil" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="2" result="noise">
+        <animate attributeName="seed" values="2;5;8;11" dur="0.64s" calcMode="discrete" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <!-- wobbly checkerboards -->
+    <filter id="wavy" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="turbulence" baseFrequency="0.014 0.02" numOctaves="1" seed="7" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="16" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Doodles -->
+  <symbol id="d-star" viewBox="0 0 100 100">
+    <path d="M50 6 L56.5 34.3 L78.3 21.7 L66.6 43.1 L95 50 L65.7 56.5 L76.9 76.9 L56.9 66.6 L50 93 L43.5 65.7 L21 79 L33.4 56.9 L6 50 L34.3 43.5 L22.4 22.4 L43.1 33.4 Z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="d-sparkle" viewBox="0 0 24 24">
+    <path d="M12 1C12.9 7.6 16.4 11.1 23 12 16.4 12.9 12.9 16.4 12 23 11.1 16.4 7.6 12.9 1 12 7.6 11.1 11.1 7.6 12 1Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="d-paw" viewBox="0 0 64 64">
+    <g fill="currentColor">
+      <path d="M32 30C42 30 50 40 50 47 50 54 44 56.5 38 55 35.5 54.4 34 54 32 54 30 54 28.5 54.4 26 55 20 56.5 14 54 14 47 14 40 22 30 32 30Z"/>
+      <ellipse cx="15" cy="27" rx="5.5" ry="7.5" transform="rotate(-22 15 27)"/>
+      <ellipse cx="25.5" cy="15.5" rx="5.8" ry="8"/>
+      <ellipse cx="38.5" cy="15.5" rx="5.8" ry="8"/>
+      <ellipse cx="49" cy="27" rx="5.5" ry="7.5" transform="rotate(22 49 27)"/>
+    </g>
+  </symbol>
+  <symbol id="d-heart" viewBox="0 0 100 100">
+    <path d="M50 88C20 68 6 50 6 32 6 18 17 9 29 9 38 9 46 14 50 22 54 14 62 9 71 9 83 9 94 18 94 32 94 50 80 68 50 88Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="d-heart-face" viewBox="0 0 100 100">
+    <path d="M50 88C20 68 6 50 6 32 6 18 17 9 29 9 38 9 46 14 50 22 54 14 62 9 71 9 83 9 94 18 94 32 94 50 80 68 50 88Z" fill="currentColor"/>
+    <g fill="none" stroke-width="4.5" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
+      <path d="M37 36v8M63 36v8"/><path d="M40 54Q50 63 60 54"/>
+    </g>
+  </symbol>
+  <symbol id="d-flower" viewBox="0 0 100 100">
+    <g fill="currentColor">
+      <circle cx="74" cy="50" r="18"/><circle cx="62" cy="70.8" r="18"/><circle cx="38" cy="70.8" r="18"/>
+      <circle cx="26" cy="50" r="18"/><circle cx="38" cy="29.2" r="18"/><circle cx="62" cy="29.2" r="18"/>
+      <circle cx="50" cy="50" r="24"/>
+    </g>
+    <g fill="none" stroke-width="4.5" stroke-linecap="round" style="stroke: var(--face, #FFF9EF)">
+      <path d="M41 44v7M59 44v7"/><path d="M41 58Q50 67 59 58"/>
+    </g>
+  </symbol>
+  <symbol id="d-star-face" viewBox="0 0 100 100">
+    <path d="M50 8 61.5 36.5 92 38.5 68.5 58 76 88 50 71.5 24 88 31.5 58 8 38.5 38.5 36.5Z" fill="currentColor" stroke="currentColor" stroke-width="9" stroke-linejoin="round"/>
+    <g fill="none" stroke-width="4" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
+      <path d="M43 47v6M57 47v6"/><path d="M44 60Q50 66 56 60"/>
+    </g>
+  </symbol>
+  <symbol id="d-shield-face" viewBox="0 0 100 100">
+    <path d="M50 7C62 14 74 17 86 17V48C86 72 70 86 50 94 30 86 14 72 14 48V17C26 17 38 14 50 7Z" fill="currentColor"/>
+    <g fill="none" stroke-width="4.5" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
+      <path d="M38 44v8M62 44v8"/><path d="M40 61Q50 70 60 61"/>
+    </g>
+  </symbol>
+  <symbol id="d-cat" viewBox="0 0 100 100">
+    <path d="M18 46 20 13Q21 8 26 11L42 27Q50 25 58 27L74 11Q79 8 80 13L82 46Q86 84 50 87 14 84 18 46Z" fill="currentColor"/>
+    <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--face, #2E2230)">
+      <path d="M33 52Q38 47 43 52M57 52Q62 47 67 52"/>
+      <path d="M50 62Q46 69 40 66M50 62Q54 69 60 66"/>
+      <path d="M27 62 13 60M28 68 15 72M73 62 87 60M72 68 85 72"/>
+    </g>
+    <path d="M46 58H54L50 63Z" style="fill: var(--face, #2E2230)"/>
+  </symbol>
+  <symbol id="d-dog" viewBox="0 0 100 100">
+    <path d="M50 14C68 14 80 26 80 50 80 74 68 86 50 86 32 86 20 74 20 50 20 26 32 14 50 14Z" fill="currentColor"/>
+    <path d="M32 20Q14 16 9 36 6 55 19 59 25 40 32 20ZM68 20Q86 16 91 36 94 55 81 59 75 40 68 20Z" style="fill: var(--ear, #2E2230)"/>
+    <circle cx="38" cy="47" r="4.5" style="fill: var(--face, #2E2230)"/>
+    <circle cx="62" cy="47" r="4.5" style="fill: var(--face, #2E2230)"/>
+    <ellipse cx="50" cy="64" rx="15" ry="11" style="fill: var(--snout, #FFF9EF)"/>
+    <ellipse cx="50" cy="59" rx="6.5" ry="4.5" fill="#2E2230"/>
+    <path d="M50 63V68M50 68Q45 73 41 69M50 68Q55 73 59 69" fill="none" stroke="#2E2230" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="d-flowerkid" viewBox="0 0 100 140">
+    <path d="M36 72Q24 82 17 95M64 72Q76 66 84 54" fill="none" stroke="#2E2230" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M34 64H66L70 126H56L50 94 44 126H30Z" style="fill: var(--pants, #A9C9EE)"/>
+    <g style="fill: var(--dots, #FFF9EF)">
+      <circle cx="40" cy="78" r="2.2"/><circle cx="58" cy="74" r="2.2"/><circle cx="50" cy="84" r="2.2"/>
+      <circle cx="37" cy="100" r="2.2"/><circle cx="62" cy="98" r="2.2"/><circle cx="36" cy="116" r="2.2"/><circle cx="64" cy="114" r="2.2"/>
+    </g>
+    <path d="M30 126H45Q46 134 38 134H26Q24 128 30 126ZM55 126H70Q76 128 74 134H62Q54 134 55 126Z" fill="#2E2230"/>
+    <g fill="currentColor">
+      <circle cx="67" cy="38" r="13"/><circle cx="58.5" cy="52.7" r="13"/><circle cx="41.5" cy="52.7" r="13"/>
+      <circle cx="33" cy="38" r="13"/><circle cx="41.5" cy="23.3" r="13"/><circle cx="58.5" cy="23.3" r="13"/>
+      <circle cx="50" cy="38" r="17"/>
+    </g>
+    <g fill="none" stroke-width="3" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
+      <path d="M44 34v5M56 34v5"/><path d="M44 43Q50 49 56 43"/>
+    </g>
+  </symbol>
+  <symbol id="d-puffhead" viewBox="0 0 64 64">
+    <path d="M30 8.5C29 3 34 1.5 37 4 34 4.5 33 6 33.5 8.5" fill="none" stroke="#2E2230" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="32" cy="34" r="26" fill="#2E2230"/>
+    <path d="M12 36C12 24 22 20 32 25 42 20 52 24 52 36 52 48 44 56 32 56 20 56 12 48 12 36Z" fill="#FFF9EF"/>
+    <ellipse cx="18" cy="44" rx="3.5" ry="2.2" fill="#E36888"/>
+    <ellipse cx="46" cy="44" rx="3.5" ry="2.2" fill="#E36888"/>
+    <circle cx="23" cy="35" r="3.2" fill="#2E2230"/>
+    <circle cx="41" cy="35" r="3.2" fill="#2E2230"/>
+    <path d="M26 38Q32 35 38 38L36.5 43Q32 41.5 27.5 43Z" fill="#6698CC"/>
+    <path d="M27.5 43Q32 41.5 36.5 43L35.3 46.5Q32 45.4 28.7 46.5Z" fill="#F2D88F"/>
+    <path d="M28.7 46.5Q32 45.4 35.3 46.5L32.6 54.5Q32 56 31.4 54.5Z" fill="#F08C21"/>
+  </symbol>
+
+  <!-- UI icons (24px, stroked) -->
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-syringe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2l4 4M20 4l-3.5 3.5M13.5 4.5l6 6M18 9l-9 9H6v-3l9-9M6 18l-3.5 3.5M10.5 10.5l2 2M13 8l2 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7-6.2 7-11.5a7 7 0 0 0-14 0c0 5.3 7 11.5 7 11.5z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2.5-6 4.5 12 3-8 1.5 2H22"/></symbol>
+  <symbol id="i-bowl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18a9 7 0 0 1-18 0z"/><path d="M9 8c0-1.5 1.5-2 1.5-3.5M14 8c0-1.5 1.5-2 1.5-3.5"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4.5" r="1.8"/><path d="M9 21l2.5-6.5L14 17v4M11.5 14.5l1-5.5-3.5 1.5L7.5 13M12.5 9l2.5 3 3 1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11L12 3.5l8.5 7.5V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-nav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5L20.5 3.5l-7 17-2-8z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h3.5l2 5L8 10a11 11 0 0 0 6 6l1.5-2.5 5 2V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5.5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-rate" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="currentColor"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17M6.5 16l4-5 3.5 3 5-7"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5c.7 4 2.5 5.8 6.5 6.5-4 .7-5.8 2.5-6.5 6.5-.7-4-2.5-5.8-6.5-6.5 4-.7 5.8-2.5 6.5-6.5zM18 14.5c.3 1.8 1.2 2.7 3 3-1.8.3-2.7 1.2-3 3-.3-1.8-1.2-2.7-3-3 1.8-.3 2.7-1.2 3-3z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5v11a3.5 3.5 0 1 1-3.5-3.5M14 3.5c.5 2.5 2.5 4.5 5 4.5"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.3 5.8c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2.1-.5 2.7-1.3z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3.2v17.6c0 .5.5.8.9.5l14.6-8.8c.4-.2.4-.8 0-1L5.9 2.7c-.4-.3-.9 0-.9.5z"/></symbol>
+</svg>
+
+<!-- Puff, the Puffin mascot (cloned by JS into every [data-puffin]) -->
+<template id="tpl-puffin">
+  <svg class="puffin-svg" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+    <ellipse class="pf-shadow" cx="100" cy="232" rx="50" ry="6"/>
+    <g class="pf-bob">
+      <g class="pf-foot pf-foot-l"><path class="pf-leg" d="M84 202 82 222"/><path class="pf-toe" d="M82 221 66 230Q80 235 95 230Z"/></g>
+      <g class="pf-foot pf-foot-r"><path class="pf-leg" d="M116 202 118 222"/><path class="pf-toe" d="M118 221 105 230Q120 235 134 230Z"/></g>
+      <path class="pf-wing pf-wing-l" d="M44 112C26 124 18 150 25 174 35 168 46 152 50 132Z"/>
+      <path class="pf-wing pf-wing-r" d="M156 112C174 124 182 150 175 174 165 168 154 152 150 132Z"/>
+      <path class="pf-tuft" d="M97 37C95 24 104 20 110 25 104 26 102 30 103 37"/>
+      <path class="pf-body" d="M100 34C146 34 166 78 166 128 166 182 140 210 100 210 60 210 34 182 34 128 34 78 54 34 100 34Z"/>
+      <path class="pf-belly" d="M100 134C128 134 147 154 147 178 147 198 127 208 100 208 73 208 53 198 53 178 53 154 72 134 100 134Z"/>
+      <path class="pf-scarf" d="M62 132Q100 150 138 132L136 145Q100 161 64 145Z"/>
+      <path class="pf-scarf" d="M84 150 100 178 116 150Q100 157 84 150Z"/>
+      <circle class="pf-dot" cx="100" cy="163" r="2.6"/>
+      <path class="pf-face" d="M56 82C57 62 80 54 100 64 120 54 143 62 144 82 147 104 132 122 100 124 68 122 53 104 56 82Z"/>
+      <ellipse class="pf-cheek" cx="66" cy="104" rx="8" ry="5"/>
+      <ellipse class="pf-cheek" cx="134" cy="104" rx="8" ry="5"/>
+      <g class="pf-eyes">
+        <circle cx="76" cy="84" r="7"/><circle cx="124" cy="84" r="7"/>
+        <circle class="pf-glint" cx="78.5" cy="81.5" r="2.2"/><circle class="pf-glint" cx="126.5" cy="81.5" r="2.2"/>
+      </g>
+      <g class="pf-beak">
+        <path class="pf-beak-base" d="M82 92Q100 84 118 92L114 104Q100 100 86 104Z"/>
+        <path class="pf-beak-mid" d="M86 104Q100 100 114 104L111 112Q100 109 89 112Z"/>
+        <path class="pf-beak-tip" d="M89 112Q100 109 111 112L102 136Q100 140 98 136Z"/>
+        <path class="pf-beak-line" d="M82 92Q100 84 118 92L102 136Q100 140 98 136Z"/>
+      </g>
+    </g>
+  </svg>
+</template>
+
+<div class="progress" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="Puffin home">
+      <svg class="logo-mark"><use href="#d-puffhead"/></svg>
+      <span>Puffin</span>
+    </a>
+    <nav class="nav-menu" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#mission">Mission</a>
+      <a href="#values">Values</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-ink nav-menu-cta" href="#download">Get the app</a>
+    </nav>
+    <a class="btn btn-ink btn-sm nav-cta" href="#download">Get the app <svg><use href="#i-arrow"/></svg></a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="blob blob--butter"></span>
+      <span class="blob blob--pink"></span>
+      <span class="blob blob--sky"></span>
+      <svg class="fd fd-1 doodle"><use href="#d-sparkle"/></svg>
+      <svg class="fd fd-2 doodle"><use href="#d-star"/></svg>
+      <svg class="fd fd-3 doodle"><use href="#d-sparkle"/></svg>
+      <svg class="fd fd-4 doodle"><use href="#d-heart"/></svg>
+    </div>
+
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><svg class="spin"><use href="#d-sparkle"/></svg>Pet care app · health, reminders &amp; vets</p>
+        <h1 class="hero-title">
+          <span class="w" style="--i:0">A</span>
+          <span class="w hl" style="--i:1">happier<svg class="hl-line" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C20 4 36 4 52 11S86 18 102 11 136 4 152 11 186 17 197 9" pathLength="1"/></svg></span>
+          <span class="w" style="--i:2">life</span>
+          <span class="w" style="--i:3">for</span>
+          <span class="w" style="--i:4">every</span>
+          <span class="w hl-paw" style="--i:5">paw.<svg class="title-paw" aria-hidden="true"><use href="#d-paw"/></svg></span>
+        </h1>
+        <p class="hero-lead">Puffin keeps your pet's health records, vaccine reminders, daily activity and nearby vet clinics together in one cheerful app — so caring for them feels easy, not overwhelming.</p>
+        <div class="hero-actions">
+          <a class="btn-store btn-store--apple" href="#download"><svg><use href="#i-apple"/></svg><span><small>Download on the</small>App Store</span></a>
+          <a class="btn-store btn-store--play" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
+        </div>
+        <p class="hero-note">
+          <svg class="note-arrow" viewBox="0 0 100 50" aria-hidden="true"><path d="M8 44C24 40 52 30 70 10M58 9 71 9 72 22"/></svg>
+          Made for cats, dogs &amp; every paw in between
+        </p>
+      </div>
+
+      <div class="hero-art">
+        <div class="mosaic" aria-hidden="true">
+          <div class="m-tile bg-butter" style="--i:0"><svg class="doodle spin-slow c-cream"><use href="#d-star"/></svg></div>
+          <div class="m-tile t-checker" style="--i:1"><span class="checker"></span></div>
+          <div class="m-tile bg-blush" style="--i:2"><svg class="doodle c-butter" style="--face:#2E2230"><use href="#d-cat"/></svg></div>
+          <div class="m-tile bg-sea" style="--i:3"><span class="m-word">Puffin</span></div>
+          <div class="m-tile bg-tangerine" style="--i:4"></div>
+          <div class="m-tile bg-paper" style="--i:5"><svg class="doodle wiggle c-tangerine"><use href="#d-flower"/></svg></div>
+          <div class="m-tile bg-pink" style="--i:6"><svg class="doodle c-cherry"><use href="#d-paw"/></svg></div>
+          <div class="m-tile bg-butter" style="--i:7"></div>
+          <div class="m-tile bg-olive" style="--i:8"><svg class="doodle c-cream" style="--ear:#F08C21;--snout:#F2D88F"><use href="#d-dog"/></svg></div>
+        </div>
+
+        <!-- Phone mockup -->
+        <div class="phone" aria-hidden="true">
+          <div class="screen">
+            <span class="island"></span>
+            <div class="status"><b>9:41</b><span class="status-ico"><i></i><i></i><i></i></span></div>
+            <div class="app-head">
+              <div><small>Good morning,</small><strong>Hi, Pawrents!</strong></div>
+              <span class="app-bell"><svg><use href="#i-bell"/></svg><i></i></span>
+            </div>
+            <div class="app-pet">
+              <span class="av av--lg bg-butter"><svg style="--face:#2E2230" class="c-blush"><use href="#d-cat"/></svg></span>
+              <div><b>Nala</b><small>British Shorthair · 2 yrs</small></div>
+              <span class="app-badge"><svg><use href="#i-heart"/></svg>Healthy</span>
+            </div>
+            <div class="app-chips">
+              <span class="chip is-on">All pets</span>
+              <span class="chip"><span class="av bg-blush"><svg class="c-butter"><use href="#d-cat"/></svg></span>Nala</span>
+              <span class="chip"><span class="av bg-sea"><svg class="c-cream" style="--ear:#F08C21"><use href="#d-dog"/></svg></span>Bobo</span>
+            </div>
+            <div class="app-card">
+              <div class="app-card-head"><b>Today</b><span class="task-count">1 of 3 done</span></div>
+              <ul class="tasks">
+                <li class="task is-done"><span class="t-ico bg-butter"><svg><use href="#i-bowl"/></svg></span><span class="t-txt"><b>Breakfast</b><small>Nala · 07:30</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
+                <li class="task"><span class="t-ico bg-sky"><svg><use href="#i-syringe"/></svg></span><span class="t-txt"><b>Rabies vaccine</b><small>Bobo · 10:00</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
+                <li class="task"><span class="t-ico bg-pink"><svg><use href="#i-walk"/></svg></span><span class="t-txt"><b>Evening walk</b><small>Bobo · 17:30</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
+              </ul>
+            </div>
+            <div class="app-card app-walk">
+              <div class="app-card-head"><b>Bobo's walk</b><span>3.6 / 5 km</span></div>
+              <div class="bar"><i></i></div>
+            </div>
+            <nav class="app-tabs">
+              <span class="is-on"><svg><use href="#i-home"/></svg></span>
+              <span><svg><use href="#i-cal"/></svg></span>
+              <span><svg><use href="#i-pin"/></svg></span>
+              <span><svg><use href="#i-user"/></svg></span>
+            </nav>
+          </div>
+        </div>
+
+        <div class="toast toast--1" aria-hidden="true">
+          <span class="toast-ico bg-blush"><svg><use href="#i-bell"/></svg></span>
+          <span class="toast-txt"><b>Vaccine tomorrow</b><small>Bobo · Rabies booster, 10:00</small></span>
+        </div>
+        <div class="toast toast--2" aria-hidden="true">
+          <span class="toast-ico bg-sea"><svg><use href="#i-pin"/></svg></span>
+          <span class="toast-txt"><b>Vet nearby</b><small>Happy Tails Clinic · 0.6 km</small></span>
+        </div>
+        <div class="toast toast--3" aria-hidden="true">
+          <span class="toast-ico bg-butter"><svg><use href="#i-chart"/></svg></span>
+          <span class="toast-txt"><b>Nala is thriving</b><small>Weight stable · 4.2 kg</small></span>
+        </div>
+        <button class="mascot hero-mascot is-waving" data-puffin aria-label="Say hi to Puff, the Puffin mascot"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE BANDS ============ -->
+  <div class="bands" aria-hidden="true">
+    <div class="band band--b">
+      <div class="band-track" data-loop>
+        <span>Compassion</span><svg><use href="#d-heart"/></svg>
+        <span>Responsibility</span><svg><use href="#d-heart"/></svg>
+        <span>Convenience</span><svg><use href="#d-heart"/></svg>
+        <span>Well-being</span><svg><use href="#d-heart"/></svg>
+        <span>Compassion</span><svg><use href="#d-heart"/></svg>
+        <span>Responsibility</span><svg><use href="#d-heart"/></svg>
+        <span>Convenience</span><svg><use href="#d-heart"/></svg>
+        <span>Well-being</span><svg><use href="#d-heart"/></svg>
+      </div>
+    </div>
+    <div class="band band--a">
+      <div class="band-track" data-loop>
+        <span>Health tracking</span><svg><use href="#d-sparkle"/></svg>
+        <span>Vaccine reminders</span><svg><use href="#d-sparkle"/></svg>
+        <span>Feeding times</span><svg><use href="#d-sparkle"/></svg>
+        <span>Daily activity</span><svg><use href="#d-sparkle"/></svg>
+        <span>Nearby vets</span><svg><use href="#d-sparkle"/></svg>
+        <span>Happy paws</span><svg><use href="#d-sparkle"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section about" id="about">
+    <div class="container about-grid">
+      <div class="about-collage">
+        <div class="ac-tile ac-1 bg-butter" data-reveal="pop">
+          <span class="mascot mascot--still" data-puffin></span>
+        </div>
+        <div class="ac-tile ac-2 bg-blush" data-reveal="pop" style="--d:120ms">
+          <svg class="doodle c-butter"><use href="#d-cat"/></svg>
+        </div>
+        <div class="ac-tile ac-3 bg-sea" data-reveal="pop" style="--d:240ms">
+          <svg class="doodle c-cream" style="--ear:#E36888;--snout:#F2D88F"><use href="#d-dog"/></svg>
+        </div>
+        <div class="ac-tile ac-4 bg-tangerine" data-reveal="pop" style="--d:360ms">
+          <strong>4-in-1</strong>
+          <span>care tools, one happy app</span>
+          <svg class="ac-spark spin-slow"><use href="#d-sparkle"/></svg>
+        </div>
+      </div>
+
+      <div class="about-copy">
+        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>About us</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Pet care that's practical, organized — and <span class="c-blush">full of love.</span></h2>
+        <p class="lead" data-reveal style="--d:160ms">Puffin is a digital platform designed to help pet owners manage their pets' needs and well-being in a practical and organized way. Through health tracking, vaccination reminders, daily activity tracking and nearby veterinary clinic search, Puffin makes it easier to monitor your pet's health and activities in one convenient app.</p>
+        <blockquote class="belief" data-reveal style="--d:240ms">
+          <svg class="belief-mark" viewBox="0 0 40 30" aria-hidden="true"><path d="M4 26c0-10 4-18 12-22M22 26c0-10 4-18 12-22"/></svg>
+          <p>We believe every pet deserves proper attention and care to live a healthy and happy life.</p>
+        </blockquote>
+        <ul class="pill-row" data-reveal style="--d:320ms">
+          <li><svg><use href="#i-pulse"/></svg>Health tracking</li>
+          <li><svg><use href="#i-bell"/></svg>Vaccine reminders</li>
+          <li><svg><use href="#i-walk"/></svg>Daily activity</li>
+          <li><svg><use href="#i-pin"/></svg>Vet finder</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section features" id="features">
+    <div class="container">
+      <div class="section-head center">
+        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>What Puffin does</p>
+        <h2 class="h2" data-reveal style="--d:80ms">All your pet's care, in one <span class="c-sea">cozy</span> place.</h2>
+        <p class="lead" data-reveal style="--d:160ms">Four everyday tools that work together, so nothing slips through the cracks — from the first vaccine to the hundredth walk.</p>
+      </div>
+
+      <div class="bento">
+        <!-- Health tracking -->
+        <article class="bento-tile tile-wide bg-butter" data-reveal>
+          <div class="tile-copy">
+            <span class="tile-ico"><svg><use href="#i-pulse"/></svg></span>
+            <h3>Health tracking</h3>
+            <p>Log weight, symptoms, medication and vet visits. Puffin turns every entry into a tidy timeline and easy-to-read trends, so small changes get noticed early.</p>
+            <ul class="ticks">
+              <li><svg><use href="#i-check"/></svg>Weight &amp; body condition</li>
+              <li><svg><use href="#i-check"/></svg>Symptoms &amp; medication log</li>
+              <li><svg><use href="#i-check"/></svg>Complete vet visit history</li>
+            </ul>
+          </div>
+          <div class="mock mock-chart">
+            <div class="mock-head">
+              <div><small>Nala's weight · 8 weeks</small><strong><span data-count="4.2" data-decimals="1">0.0</span> kg</strong></div>
+              <span class="pill pill--ok"><i></i>Healthy range</span>
+            </div>
+            <svg class="chart" viewBox="0 0 320 130" aria-hidden="true">
+              <path class="chart-grid" d="M0 30H320M0 60H320M0 90H320"/>
+              <path class="chart-area" d="M10 92C31 92 32 74 53 74S75 83 96 83 118 65 139 65 160 56 181 56 203 60 224 60 246 47 267 47 289 38 310 38L310 122 10 122Z"/>
+              <path class="chart-line" pathLength="1" d="M10 92C31 92 32 74 53 74S75 83 96 83 118 65 139 65 160 56 181 56 203 60 224 60 246 47 267 47 289 38 310 38"/>
+              <g class="chart-dots">
+                <circle cx="53" cy="74" r="4.5" style="--i:1"/><circle cx="139" cy="65" r="4.5" style="--i:3"/>
+                <circle cx="224" cy="60" r="4.5" style="--i:5"/><circle class="is-last" cx="310" cy="38" r="6.5" style="--i:7"/>
+              </g>
+            </svg>
+            <div class="chart-x"><span>Sep</span><span>Oct</span><span>Nov</span></div>
+            <div class="log-chips">
+              <span><i class="bg-olive"></i>Appetite · Good</span>
+              <span><i class="bg-blush"></i>Mood · Playful</span>
+              <span><i class="bg-sea"></i>Meds · Done</span>
+            </div>
+          </div>
+          <svg class="tile-deco doodle spin-slow c-cream" aria-hidden="true"><use href="#d-star"/></svg>
+        </article>
+
+        <!-- Reminders -->
+        <article class="bento-tile tile-narrow bg-blush" data-reveal style="--d:120ms">
+          <div class="tile-copy">
+            <span class="tile-ico"><svg><use href="#i-bell"/></svg></span>
+            <h3>Vaccine &amp; feeding reminders</h3>
+            <p>Set it once and relax. Puffin nudges you about vaccines, meds, grooming and feeding times — right when it matters.</p>
+          </div>
+          <div class="mock mock-remind">
+            <div class="remind remind--next">
+              <span class="remind-tag">Tomorrow</span>
+              <div class="remind-row">
+                <span class="r-ico bg-sky"><svg><use href="#i-syringe"/></svg></span>
+                <span class="r-txt"><b>Rabies booster</b><small>Bobo · 10:00</small></span>
+                <span class="r-bell"><svg><use href="#i-bell"/></svg></span>
+              </div>
+            </div>
+            <div class="remind">
+              <div class="remind-row">
+                <span class="r-ico bg-butter"><svg><use href="#i-bowl"/></svg></span>
+                <span class="r-txt"><b>Dinner time</b><small>Nala · 18:00 · daily</small></span>
+                <span class="switch" style="--d:500ms"></span>
+              </div>
+            </div>
+            <div class="remind">
+              <div class="remind-row">
+                <span class="r-ico bg-pink"><svg><use href="#i-heart"/></svg></span>
+                <span class="r-txt"><b>Flea &amp; tick drops</b><small>Bobo · every 30 days</small></span>
+                <span class="switch" style="--d:800ms"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Activity -->
+        <article class="bento-tile tile-narrow bg-sea" data-reveal>
+          <div class="tile-copy">
+            <span class="tile-ico"><svg><use href="#i-walk"/></svg></span>
+            <h3>Daily activity</h3>
+            <p>Track walks, playtime and meals to keep a happy, healthy routine — and see how today compares.</p>
+          </div>
+          <div class="mock mock-activity">
+            <svg class="rings" viewBox="0 0 140 140" aria-hidden="true">
+              <g transform="rotate(-90 70 70)">
+                <circle class="ring-track" cx="70" cy="70" r="58" style="--c:var(--tangerine)"/>
+                <circle class="ring" cx="70" cy="70" r="58" pathLength="100" style="--c:var(--tangerine);--off:28"/>
+                <circle class="ring-track" cx="70" cy="70" r="44" style="--c:var(--blush)"/>
+                <circle class="ring" cx="70" cy="70" r="44" pathLength="100" style="--c:var(--blush);--off:45;--d:200ms"/>
+                <circle class="ring-track" cx="70" cy="70" r="30" style="--c:var(--olive)"/>
+                <circle class="ring" cx="70" cy="70" r="30" pathLength="100" style="--c:var(--olive);--off:33;--d:400ms"/>
+              </g>
+              <use href="#d-paw" x="57" y="57" width="26" height="26" class="rings-paw"/>
+            </svg>
+            <ul class="ring-legend">
+              <li><i class="bg-tangerine"></i><span>Walk</span><b><span data-count="3.6" data-decimals="1">0.0</span> km</b></li>
+              <li><i class="bg-blush"></i><span>Play</span><b><span data-count="40">0</span> min</b></li>
+              <li><i class="bg-olive"></i><span>Meals</span><b>2 / 3</b></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Vets -->
+        <article class="bento-tile tile-wide bg-tangerine" data-reveal style="--d:120ms">
+          <div class="tile-copy">
+            <span class="tile-ico"><svg><use href="#i-pin"/></svg></span>
+            <h3>Nearby vet clinics</h3>
+            <p>Find veterinary clinics and animal healthcare services around you — with distance, opening hours and one-tap directions when you need them most.</p>
+            <ul class="ticks">
+              <li><svg><use href="#i-check"/></svg>Clinics, hospitals &amp; groomers</li>
+              <li><svg><use href="#i-check"/></svg>Open-now &amp; 24-hour filters</li>
+            </ul>
+          </div>
+          <div class="mock mock-vets">
+            <svg class="map" viewBox="0 0 320 200" aria-hidden="true">
+              <rect width="320" height="200" rx="16" fill="#F7E7D0"/>
+              <path d="M196 14C238 4 292 20 302 56 308 86 272 96 242 88 212 82 182 46 196 14Z" fill="#CDD38A"/>
+              <path d="M24 160C14 140 30 118 54 124 74 130 80 156 64 170 48 182 30 176 24 160Z" fill="#CDD38A"/>
+              <path d="M-10 186C60 160 110 206 170 182S270 140 330 160" fill="none" stroke="#A9C9EE" stroke-width="16" stroke-linecap="round"/>
+              <path d="M0 74H320M118 0V200M0 126C80 116 200 136 320 106M232 0 192 200" fill="none" stroke="#FFF9EF" stroke-width="10" stroke-linecap="round"/>
+              <path class="map-route" d="M118 126C150 124 178 114 196 90" fill="none" stroke="#2E2230" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
+              <g transform="translate(118 126)">
+                <circle class="radar" r="9"/><circle class="radar radar--2" r="9"/>
+                <circle r="8" fill="#6698CC" stroke="#FFF9EF" stroke-width="3"/>
+              </g>
+              <g transform="translate(196 90)"><g class="map-pin" style="--i:0"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#E36888" stroke="#2E2230" stroke-width="2.5"/><circle cy="-23" r="5" fill="#FFF9EF"/></g></g>
+              <g transform="translate(62 62)"><g class="map-pin" style="--i:1"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#F08C21" stroke="#2E2230" stroke-width="2.5"/><circle cy="-23" r="5" fill="#FFF9EF"/></g></g>
+              <g transform="translate(270 146)"><g class="map-pin" style="--i:2"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#F08C21" stroke="#2E2230" stroke-width="2.5"/><circle cy="-23" r="5" fill="#FFF9EF"/></g></g>
+            </svg>
+            <ul class="clinics">
+              <li class="is-near">
+                <span class="cl-ico bg-blush"><svg><use href="#i-pin"/></svg></span>
+                <span class="cl-txt"><b>Happy Tails Vet Clinic</b><small>0.6 km · <em>Open now</em></small></span>
+                <span class="cl-rate"><svg><use href="#i-rate"/></svg>4.9</span>
+              </li>
+              <li>
+                <span class="cl-ico bg-butter"><svg><use href="#i-pin"/></svg></span>
+                <span class="cl-txt"><b>Paws &amp; Claws Hospital</b><small>1.2 km · <em>24 hours</em></small></span>
+                <span class="cl-rate"><svg><use href="#i-rate"/></svg>4.8</span>
+              </li>
+              <li>
+                <span class="cl-ico bg-butter"><svg><use href="#i-pin"/></svg></span>
+                <span class="cl-txt"><b>Whisker Wellness Center</b><small>2.0 km · Closes 20:00</small></span>
+                <span class="cl-rate"><svg><use href="#i-rate"/></svg>4.7</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section how" id="how">
+    <div class="container">
+      <div class="section-head center">
+        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>How it works</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Set it up once. <span class="c-tangerine">Puffin</span> handles the remembering.</h2>
+      </div>
+
+      <div class="steps">
+        <svg class="how-path" viewBox="0 0 1000 160" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <mask id="howMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="160">
+              <path id="howMaskPath" d="M40 80C190 0 300 160 500 80S810 0 960 80" fill="none" stroke="#fff" stroke-width="60" pathLength="1"/>
+            </mask>
+          </defs>
+          <path class="how-dash" d="M40 80C190 0 300 160 500 80S810 0 960 80" mask="url(#howMask)"/>
+        </svg>
+
+        <article class="step" data-reveal>
+          <div class="step-art bg-blush">
+            <svg class="doodle c-butter"><use href="#d-cat"/></svg>
+            <span class="step-plus"><svg><use href="#i-plus"/></svg></span>
+          </div>
+          <span class="step-num">01</span>
+          <h3>Add your pet</h3>
+          <p>Create a profile with their name, breed, age and health notes. It only takes a minute.</p>
+        </article>
+        <article class="step" data-reveal style="--d:150ms">
+          <div class="step-art bg-butter">
+            <svg class="step-bell"><use href="#i-bell"/></svg>
+            <svg class="step-spark spin-slow"><use href="#d-sparkle"/></svg>
+          </div>
+          <span class="step-num">02</span>
+          <h3>Build their routine</h3>
+          <p>Pick reminders for vaccines, meds, meals and walks — or customise them to fit your day.</p>
+        </article>
+        <article class="step" data-reveal style="--d:300ms">
+          <div class="step-art bg-sea">
+            <svg class="doodle c-tangerine heartbeat" style="--face:#2E2230"><use href="#d-heart-face"/></svg>
+          </div>
+          <span class="step-num">03</span>
+          <h3>Relax &amp; enjoy</h3>
+          <p>Get nudges at the right time, see their progress and find a vet fast whenever you need one.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VISION & MISSION ============ -->
+  <section class="section mission" id="mission">
+    <div class="container">
+      <div class="vision bg-sea" data-reveal>
+        <div class="vision-copy">
+          <p class="label label--cream"><svg><use href="#d-sparkle"/></svg>Our vision</p>
+          <p class="vision-quote">To become a trusted digital platform that supports pet well-being through easy, practical, and integrated health and activity management.</p>
+        </div>
+        <div class="vision-art" aria-hidden="true">
+          <span class="mascot mascot--still vision-mascot" data-puffin></span>
+          <svg class="vs vs-1 doodle twinkle"><use href="#d-star"/></svg>
+          <svg class="vs vs-2 twinkle"><use href="#d-sparkle"/></svg>
+          <svg class="vs vs-3 twinkle"><use href="#d-sparkle"/></svg>
+          <svg class="vs vs-4 doodle twinkle"><use href="#d-star"/></svg>
+        </div>
+        <span class="vision-word" aria-hidden="true">Vision</span>
+      </div>
+
+      <div class="section-head mission-head">
+        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>Our mission</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Five promises we make to <span class="c-blush">every pet parent.</span></h2>
+      </div>
+
+      <div class="mission-grid">
+        <article class="m-card bg-butter" data-reveal>
+          <span class="m-num">01</span>
+          <span class="m-ico"><svg><use href="#i-chart"/></svg></span>
+          <h3>Monitor with ease</h3>
+          <p>To make it easier for pet owners to monitor their pets' health and development.</p>
+        </article>
+        <article class="m-card bg-pink" data-reveal style="--d:100ms">
+          <span class="m-num">02</span>
+          <span class="m-ico"><svg><use href="#i-bell"/></svg></span>
+          <h3>Never miss a moment</h3>
+          <p>To provide reminders for vaccination schedules, feeding times, and daily activities.</p>
+        </article>
+        <article class="m-card bg-sky" data-reveal style="--d:200ms">
+          <span class="m-num">03</span>
+          <span class="m-ico"><svg><use href="#i-pin"/></svg></span>
+          <h3>Care close to home</h3>
+          <p>To help pet owners access information about nearby veterinary clinics and animal healthcare services.</p>
+        </article>
+        <article class="m-card bg-tangerine" data-reveal>
+          <span class="m-num">04</span>
+          <span class="m-ico"><svg><use href="#i-heart"/></svg></span>
+          <h3>Champion responsible care</h3>
+          <p>To raise awareness of the importance of responsible pet care and animal well-being.</p>
+        </article>
+        <article class="m-card bg-olive" data-reveal style="--d:100ms">
+          <span class="m-num">05</span>
+          <span class="m-ico"><svg><use href="#i-sparkles"/></svg></span>
+          <h3>Organized, the digital way</h3>
+          <p>To create a more organized pet care experience through digital technology.</p>
+        </article>
+        <div class="m-card m-card--mascot" data-reveal style="--d:200ms">
+          <span class="mascot is-waving m-mascot" data-puffin></span>
+          <p class="m-hand">Five promises,<br>one very happy puffin!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CORE VALUES ============ -->
+  <section class="section values" id="values">
+    <div class="container">
+      <div class="section-head center">
+        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>Core values</p>
+        <h2 class="h2" data-reveal style="--d:80ms">What we stand for, <span class="c-sea">paw on heart.</span></h2>
+      </div>
+      <div class="values-grid">
+        <article class="v-card bg-blush" data-reveal="pop">
+          <svg class="v-doodle doodle c-butter" style="--face:#2E2230"><use href="#d-heart-face"/></svg>
+          <span class="v-num">01</span>
+          <h3>Compassion</h3>
+          <p>Prioritizing love, kindness, and genuine care for every pet.</p>
+        </article>
+        <article class="v-card bg-sea" data-reveal="pop" style="--d:120ms">
+          <svg class="v-doodle doodle c-cream" style="--face:#2E2230"><use href="#d-shield-face"/></svg>
+          <span class="v-num">02</span>
+          <h3>Responsibility</h3>
+          <p>Encouraging pet owners to take responsibility for their pets' health, needs, and overall care.</p>
+        </article>
+        <article class="v-card bg-butter" data-reveal="pop" style="--d:240ms">
+          <svg class="v-doodle doodle c-tangerine" style="--face:#2E2230"><use href="#d-star-face"/></svg>
+          <span class="v-num">03</span>
+          <h3>Convenience</h3>
+          <p>Providing practical and accessible solutions to make pet care easier and more manageable.</p>
+        </article>
+        <article class="v-card bg-olive" data-reveal="pop" style="--d:360ms">
+          <svg class="v-doodle doodle c-pink" style="--face:#2E2230"><use href="#d-flower"/></svg>
+          <span class="v-num">04</span>
+          <h3>Well-being</h3>
+          <p>Supporting pets' quality of life by prioritizing their physical health and emotional well-being.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TILE BELT (Daisy-style pattern) ============ -->
+  <div class="belt" aria-hidden="true">
+    <div class="belt-row" data-loop>
+      <div class="b-tile bg-butter"><svg class="doodle c-cream"><use href="#d-star"/></svg></div>
+      <div class="b-tile bg-pink"><svg class="kid c-blush" style="--pants:#A9C9EE"><use href="#d-flowerkid"/></svg></div>
+      <div class="b-tile bg-cherry"><span class="b-mono">Pf</span></div>
+      <div class="b-tile bg-paper"><svg class="doodle c-butter"><use href="#d-star"/></svg></div>
+      <div class="b-tile bg-olive"><svg class="doodle c-cream"><use href="#d-flower"/></svg></div>
+      <div class="b-tile t-checker"><span class="checker"></span></div>
+      <div class="b-tile bg-sky"><span class="b-word">Puffin</span></div>
+      <div class="b-tile bg-paper"><svg class="kid c-tangerine" style="--pants:#E36888"><use href="#d-flowerkid"/></svg></div>
+      <div class="b-tile bg-tangerine"><span class="b-word b-word--butter">Every<br>paw</span></div>
+    </div>
+    <div class="belt-row belt-row--rev" data-loop>
+      <div class="b-tile bg-paper"><span class="mascot mascot--still" data-puffin></span></div>
+      <div class="b-tile bg-blush"><svg class="doodle c-butter"><use href="#d-cat"/></svg></div>
+      <div class="b-tile bg-butter"><svg class="kid c-olive" style="--pants:#F08C21"><use href="#d-flowerkid"/></svg></div>
+      <div class="b-tile t-checker t-checker--pink"><span class="checker"></span></div>
+      <div class="b-tile bg-sea"><svg class="doodle c-cream" style="--ear:#F08C21;--snout:#F2D88F"><use href="#d-dog"/></svg></div>
+      <div class="b-tile bg-pink"><svg class="doodle c-cherry"><use href="#d-paw"/></svg></div>
+      <div class="b-tile bg-olive"><span class="b-mono b-mono--cream">Pf</span></div>
+      <div class="b-tile bg-paper"><svg class="doodle c-blush"><use href="#d-heart"/></svg></div>
+      <div class="b-tile bg-sky"><svg class="doodle c-cream"><use href="#d-star"/></svg></div>
+    </div>
+  </div>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section faq" id="faq">
+    <div class="container faq-grid">
+      <div class="faq-intro">
+        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>FAQ</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Questions? We've got <span class="c-tangerine">answers.</span></h2>
+        <p class="lead" data-reveal style="--d:160ms">Can't find what you're looking for? Drop us a line and a real human (with a real pet) will get back to you.</p>
+        <a class="btn btn-ghost" href="mailto:hello@puffin.app" data-reveal style="--d:240ms"><svg><use href="#i-mail"/></svg>hello@puffin.app</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item is-open" data-reveal>
+          <h3><button class="faq-q" aria-expanded="true" aria-controls="faq-a1" id="faq-q1">What is Puffin?<span class="faq-plus"><svg><use href="#i-plus"/></svg></span></button></h3>
+          <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><div><p>Puffin is a pet-care app that brings health tracking, vaccination and feeding reminders, daily activity tracking and a nearby vet-clinic finder into one place — so you can look after your pet without juggling notes, chats and calendars.</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal style="--d:80ms">
+          <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">Which pets can I add?<span class="faq-plus"><svg><use href="#i-plus"/></svg></span></button></h3>
+          <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2"><div><p>Puffin is designed with cats and dogs in mind, and you can add other furry, feathered or scaly companions too. Each pet gets their own profile, health timeline and reminders.</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal style="--d:160ms">
+          <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">How do reminders work?<span class="faq-plus"><svg><use href="#i-plus"/></svg></span></button></h3>
+          <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3"><div><p>Choose a reminder type — vaccine, medication, feeding, grooming or walks — then set a time and how often it repeats. Puffin sends a gentle nudge at the right moment and keeps a record once it's done.</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal style="--d:240ms">
+          <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">How does the vet clinic search work?<span class="faq-plus"><svg><use href="#i-plus"/></svg></span></button></h3>
+          <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4"><div><p>With your permission, Puffin uses your location to show veterinary clinics and animal healthcare services nearby, including distance, opening hours and directions.</p></div></div>
+        </div>
+        <div class="faq-item" data-reveal style="--d:320ms">
+          <h3><button class="faq-q" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">Is my pet's data private?<span class="faq-plus"><svg><use href="#i-plus"/></svg></span></button></h3>
+          <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5"><div><p>Your pet's records belong to you. We only use your data to power the features you use, and you can export or delete it whenever you like.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section cta" id="download">
+    <div class="container">
+      <div class="cta-panel bg-tangerine" data-reveal="pop">
+        <div class="cta-tiles" aria-hidden="true">
+          <span class="ct ct-1 bg-butter"><svg class="doodle c-cream spin-slow"><use href="#d-star"/></svg></span>
+          <span class="ct ct-2 bg-blush"><svg class="doodle c-butter"><use href="#d-flower"/></svg></span>
+          <span class="ct ct-3 bg-sea"><svg class="doodle c-cream"><use href="#d-paw"/></svg></span>
+          <span class="ct ct-4 t-checker"><span class="checker"></span></span>
+        </div>
+        <span class="mascot is-waving cta-mascot" data-puffin aria-hidden="true"></span>
+        <div class="cta-copy">
+          <h2 class="cta-title">Ready for happier days together?</h2>
+          <p>Download Puffin and give every paw the care, attention and love it deserves.</p>
+          <div class="hero-actions cta-actions">
+            <a class="btn-store btn-store--apple" href="#download"><svg><use href="#i-apple"/></svg><span><small>Download on the</small>App Store</span></a>
+            <a class="btn-store btn-store--play" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="logo logo--light" href="#top" aria-label="Puffin home">
+        <svg class="logo-mark"><use href="#d-puffhead"/></svg><span>Puffin</span>
+      </a>
+      <p>A happier life for every paw. Health, reminders, activity and vets — all in one cozy app.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg><use href="#i-insta"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg><use href="#i-tiktok"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg><use href="#i-yt"/></svg></a>
+        <a href="mailto:hello@puffin.app" aria-label="Email"><svg><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="#about">About us</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#mission">Vision &amp; mission</a>
+      <a href="#values">Core values</a>
+      <a href="#download">Download</a>
+      <a href="mailto:hello@puffin.app">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Features</h4>
+      <a href="#features">Health tracking</a>
+      <a href="#features">Vaccine reminders</a>
+      <a href="#features">Daily activity</a>
+      <a href="#features">Vet finder</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span data-year>2026</span> Puffin. Made with love for every paw.</span>
+    <span class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a></span>
+  </div>
+  <div class="footer-word" aria-hidden="true">
+    <span>P</span><span>u</span><span>f</span><span>f</span><span>i</span><span>n</span>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
