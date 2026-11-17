@@ -750,8 +750,8 @@ html.js [data-reveal].is-in { opacity: 1; translate: 0 0; }
 
   .hero-grid, .about-grid, .feature, .faq-grid, .ask-grid, .journal-card { grid-template-columns: 1fr; }
   .hero-art { max-width: 480px; }
-  .about-visual { aspect-ratio: 16 / 11; }
-  .about-visual img { width: auto; height: 78%; }
+  .about-visual { aspect-ratio: auto; padding: clamp(36px, 9vw, 64px) 0; }
+  .about-visual img { width: min(62%, 300px); height: auto; }
   .feature--flip .feature-copy { order: 0; }
   .faq-intro { position: static; }
   .journal-media { min-height: 0; aspect-ratio: 3 / 2; }
