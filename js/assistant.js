@@ -190,7 +190,6 @@
   const lockBar = chat.querySelector('.chat-lock');
   const paws = [...chat.querySelectorAll('.quota-paws svg')];
   const quotaText = chat.querySelector('.quota-text');
-  const mascot = wrap.querySelector('.chat-mascot');
   const asked = new Set();
   let busy = false;
   let greeted = false;
@@ -211,7 +210,7 @@
 
   const addRow = (who) => {
     const row = el('div', `msg msg--${who}`);
-    if (who === 'bot') row.innerHTML = '<span class="msg-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#d-puffhead"/></svg></span>';
+    if (who === 'bot') row.innerHTML = '<span class="msg-av" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#d-paw"/></svg></span>';
     const bubble = el('div', 'bubble');
     row.appendChild(bubble);
     log.appendChild(row);
@@ -256,7 +255,7 @@
     }
     if (answer.tip) {
       const tip = el('p', 'bubble-tip');
-      tip.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#d-sparkle"/></svg>';
+      tip.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sparkles"/></svg>';
       const span = el('span');
       tip.appendChild(span);
       bubble.appendChild(tip);
@@ -309,7 +308,6 @@
     lockBar.hidden = false;
     suggest.replaceChildren();
     chat.classList.add('is-locked');
-    mascot.classList.add('is-waving');
   };
 
   const greeting = () => {

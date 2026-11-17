@@ -4,43 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Puffin — A Happier Life for Every Paw</title>
-  <meta name="description" content="Puffin is a pet-care app for health tracking, vaccination reminders, daily activity and nearby vet clinics — all in one cheerful place.">
-  <meta name="theme-color" content="#FBF1E2">
+  <meta name="description" content="Puffin is a pet-care app for health tracking, vaccination reminders, daily activity and nearby vet clinics — all in one calm place.">
+  <meta name="theme-color" content="#FFF8E7">
   <meta property="og:title" content="Puffin — A Happier Life for Every Paw">
   <meta property="og:description" content="Health tracking, vaccine reminders, daily activity and nearby vets for your pets, in one app.">
+  <meta property="og:image" content="images/logo-full.png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="images/favicon.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Gluten:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=10">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<!-- ============ SVG sprite: filters, doodles, icons ============ -->
+<!-- ============ SVG sprite: icons ============ -->
 <svg class="sprite" aria-hidden="true" focusable="false">
-  <defs>
-    <!-- "line boil": makes doodles jitter like hand-drawn animation -->
-    <filter id="boil" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="2" result="noise">
-        <animate attributeName="seed" values="2;5;8;11" dur="0.64s" calcMode="discrete" repeatCount="indefinite"/>
-      </feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-    <!-- wobbly checkerboards -->
-    <filter id="wavy" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="turbulence" baseFrequency="0.014 0.02" numOctaves="1" seed="7" result="warp"/>
-      <feDisplacementMap in="SourceGraphic" in2="warp" scale="16" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </defs>
-
-  <!-- Doodles -->
-  <symbol id="d-star" viewBox="0 0 100 100">
-    <path d="M50 6 L56.5 34.3 L78.3 21.7 L66.6 43.1 L95 50 L65.7 56.5 L76.9 76.9 L56.9 66.6 L50 93 L43.5 65.7 L21 79 L33.4 56.9 L6 50 L34.3 43.5 L22.4 22.4 L43.1 33.4 Z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="d-sparkle" viewBox="0 0 24 24">
-    <path d="M12 1C12.9 7.6 16.4 11.1 23 12 16.4 12.9 12.9 16.4 12 23 11.1 16.4 7.6 12.9 1 12 7.6 11.1 11.1 7.6 12 1Z" fill="currentColor"/>
-  </symbol>
   <symbol id="d-paw" viewBox="0 0 64 64">
     <g fill="currentColor">
       <path d="M32 30C42 30 50 40 50 47 50 54 44 56.5 38 55 35.5 54.4 34 54 32 54 30 54 28.5 54.4 26 55 20 56.5 14 54 14 47 14 40 22 30 32 30Z"/>
@@ -49,87 +30,6 @@
       <ellipse cx="38.5" cy="15.5" rx="5.8" ry="8"/>
       <ellipse cx="49" cy="27" rx="5.5" ry="7.5" transform="rotate(22 49 27)"/>
     </g>
-  </symbol>
-  <symbol id="d-heart" viewBox="0 0 100 100">
-    <path d="M50 88C20 68 6 50 6 32 6 18 17 9 29 9 38 9 46 14 50 22 54 14 62 9 71 9 83 9 94 18 94 32 94 50 80 68 50 88Z" fill="currentColor"/>
-  </symbol>
-  <symbol id="d-heart-face" viewBox="0 0 100 100">
-    <path d="M50 88C20 68 6 50 6 32 6 18 17 9 29 9 38 9 46 14 50 22 54 14 62 9 71 9 83 9 94 18 94 32 94 50 80 68 50 88Z" fill="currentColor"/>
-    <g fill="none" stroke-width="4.5" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
-      <path d="M37 36v8M63 36v8"/><path d="M40 54Q50 63 60 54"/>
-    </g>
-  </symbol>
-  <symbol id="d-flower" viewBox="0 0 100 100">
-    <g fill="currentColor">
-      <circle cx="74" cy="50" r="18"/><circle cx="62" cy="70.8" r="18"/><circle cx="38" cy="70.8" r="18"/>
-      <circle cx="26" cy="50" r="18"/><circle cx="38" cy="29.2" r="18"/><circle cx="62" cy="29.2" r="18"/>
-      <circle cx="50" cy="50" r="24"/>
-    </g>
-    <g fill="none" stroke-width="4.5" stroke-linecap="round" style="stroke: var(--face, #FFF9EF)">
-      <path d="M41 44v7M59 44v7"/><path d="M41 58Q50 67 59 58"/>
-    </g>
-  </symbol>
-  <symbol id="d-star-face" viewBox="0 0 100 100">
-    <path d="M50 8 61.5 36.5 92 38.5 68.5 58 76 88 50 71.5 24 88 31.5 58 8 38.5 38.5 36.5Z" fill="currentColor" stroke="currentColor" stroke-width="9" stroke-linejoin="round"/>
-    <g fill="none" stroke-width="4" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
-      <path d="M43 47v6M57 47v6"/><path d="M44 60Q50 66 56 60"/>
-    </g>
-  </symbol>
-  <symbol id="d-shield-face" viewBox="0 0 100 100">
-    <path d="M50 7C62 14 74 17 86 17V48C86 72 70 86 50 94 30 86 14 72 14 48V17C26 17 38 14 50 7Z" fill="currentColor"/>
-    <g fill="none" stroke-width="4.5" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
-      <path d="M38 44v8M62 44v8"/><path d="M40 61Q50 70 60 61"/>
-    </g>
-  </symbol>
-  <symbol id="d-cat" viewBox="0 0 100 100">
-    <path d="M18 46 20 13Q21 8 26 11L42 27Q50 25 58 27L74 11Q79 8 80 13L82 46Q86 84 50 87 14 84 18 46Z" fill="currentColor"/>
-    <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--face, #2E2230)">
-      <path d="M33 52Q38 47 43 52M57 52Q62 47 67 52"/>
-      <path d="M50 62Q46 69 40 66M50 62Q54 69 60 66"/>
-      <path d="M27 62 13 60M28 68 15 72M73 62 87 60M72 68 85 72"/>
-    </g>
-    <path d="M46 58H54L50 63Z" style="fill: var(--face, #2E2230)"/>
-  </symbol>
-  <symbol id="d-dog" viewBox="0 0 100 100">
-    <path d="M50 14C68 14 80 26 80 50 80 74 68 86 50 86 32 86 20 74 20 50 20 26 32 14 50 14Z" fill="currentColor"/>
-    <path d="M32 20Q14 16 9 36 6 55 19 59 25 40 32 20ZM68 20Q86 16 91 36 94 55 81 59 75 40 68 20Z" style="fill: var(--ear, #2E2230)"/>
-    <circle cx="38" cy="47" r="4.5" style="fill: var(--face, #2E2230)"/>
-    <circle cx="62" cy="47" r="4.5" style="fill: var(--face, #2E2230)"/>
-    <ellipse cx="50" cy="64" rx="15" ry="11" style="fill: var(--snout, #FFF9EF)"/>
-    <ellipse cx="50" cy="59" rx="6.5" ry="4.5" fill="#2E2230"/>
-    <path d="M50 63V68M50 68Q45 73 41 69M50 68Q55 73 59 69" fill="none" stroke="#2E2230" stroke-width="3" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="d-flowerkid" viewBox="0 0 100 140">
-    <path d="M36 72Q24 82 17 95M64 72Q76 66 84 54" fill="none" stroke="#2E2230" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M34 64H66L70 126H56L50 94 44 126H30Z" style="fill: var(--pants, #A9C9EE)"/>
-    <g style="fill: var(--dots, #FFF9EF)">
-      <circle cx="40" cy="78" r="2.2"/><circle cx="58" cy="74" r="2.2"/><circle cx="50" cy="84" r="2.2"/>
-      <circle cx="37" cy="100" r="2.2"/><circle cx="62" cy="98" r="2.2"/><circle cx="36" cy="116" r="2.2"/><circle cx="64" cy="114" r="2.2"/>
-    </g>
-    <path d="M30 126H45Q46 134 38 134H26Q24 128 30 126ZM55 126H70Q76 128 74 134H62Q54 134 55 126Z" fill="#2E2230"/>
-    <g fill="currentColor">
-      <circle cx="67" cy="38" r="13"/><circle cx="58.5" cy="52.7" r="13"/><circle cx="41.5" cy="52.7" r="13"/>
-      <circle cx="33" cy="38" r="13"/><circle cx="41.5" cy="23.3" r="13"/><circle cx="58.5" cy="23.3" r="13"/>
-      <circle cx="50" cy="38" r="17"/>
-    </g>
-    <g fill="none" stroke-width="3" stroke-linecap="round" style="stroke: var(--face, #2E2230)">
-      <path d="M44 34v5M56 34v5"/><path d="M44 43Q50 49 56 43"/>
-    </g>
-  </symbol>
-  <symbol id="d-puffhead" viewBox="0 0 64 64">
-    <g fill="#FFF9EF" stroke="#2E2230" stroke-width="2.6" stroke-linejoin="round">
-      <ellipse cx="22" cy="17" rx="6.5" ry="15" transform="rotate(-12 22 17)"/>
-      <ellipse cx="42" cy="17" rx="6.5" ry="15" transform="rotate(12 42 17)"/>
-    </g>
-    <ellipse cx="22" cy="18.5" rx="2.8" ry="10" transform="rotate(-12 22 18.5)" fill="#F6B6CB"/>
-    <ellipse cx="42" cy="18.5" rx="2.8" ry="10" transform="rotate(12 42 18.5)" fill="#F6B6CB"/>
-    <ellipse cx="32" cy="41" rx="22" ry="19" fill="#FFF9EF" stroke="#2E2230" stroke-width="2.6"/>
-    <ellipse cx="19.5" cy="47" rx="3.4" ry="2.1" fill="#E36888" opacity=".6"/>
-    <ellipse cx="44.5" cy="47" rx="3.4" ry="2.1" fill="#E36888" opacity=".6"/>
-    <circle cx="24" cy="40" r="2.7" fill="#2E2230"/>
-    <circle cx="40" cy="40" r="2.7" fill="#2E2230"/>
-    <path d="M29.2 45Q32 43.2 34.8 45 33.6 47.6 32 47.6 30.4 47.6 29.2 45Z" fill="#E36888"/>
-    <path d="M32 47.6v2.2M32 49.8q-2 2.4-4.4 1M32 49.8q2 2.4 4.4 1" fill="none" stroke="#2E2230" stroke-width="1.8" stroke-linecap="round"/>
   </symbol>
 
   <!-- UI icons (24px, stroked) -->
@@ -144,8 +44,6 @@
   <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="4"/><path d="M4 20.5c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="i-nav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5L20.5 3.5l-7 17-2-8z"/></symbol>
-  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h3.5l2 5L8 10a11 11 0 0 0 6 6l1.5-2.5 5 2V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5.5a2 2 0 0 1 2-2z"/></symbol>
   <symbol id="i-rate" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="currentColor"/></symbol>
   <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17M6.5 16l4-5 3.5 3 5-7"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></symbol>
@@ -172,65 +70,25 @@
   <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3.2v17.6c0 .5.5.8.9.5l14.6-8.8c.4-.2.4-.8 0-1L5.9 2.7c-.4-.3-.9 0-.9.5z"/></symbol>
 </svg>
 
-<!-- Puff, the Puffin bunny (cloned by JS into every [data-puffin]) -->
-<template id="tpl-puffin">
-  <svg class="puffin-svg" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
-    <ellipse class="pf-shadow" cx="100" cy="234" rx="56" ry="6"/>
-    <g class="pf-bob">
-      <g class="pf-ear pf-ear-l">
-        <ellipse class="pf-fur" cx="74" cy="46" rx="16" ry="40" transform="rotate(-14 74 46)"/>
-        <ellipse class="pf-ear-in" cx="74" cy="50" rx="7.5" ry="28" transform="rotate(-14 74 50)"/>
-      </g>
-      <g class="pf-ear pf-ear-r">
-        <ellipse class="pf-fur" cx="126" cy="46" rx="16" ry="40" transform="rotate(14 126 46)"/>
-        <ellipse class="pf-ear-in" cx="126" cy="50" rx="7.5" ry="28" transform="rotate(14 126 50)"/>
-      </g>
-      <circle class="pf-fur pf-tail" cx="151" cy="206" r="13"/>
-      <path class="pf-fur" d="M100 138C134 138 152 166 152 192 152 214 130 224 100 224 70 224 48 214 48 192 48 166 66 138 100 138Z"/>
-      <ellipse class="pf-belly" cx="100" cy="198" rx="27" ry="20"/>
-      <g class="pf-foot pf-foot-l"><ellipse class="pf-fur" cx="76" cy="223" rx="22" ry="10"/><path class="pf-toes" d="M68 219v5M76 218v6M84 219v5"/></g>
-      <g class="pf-foot pf-foot-r"><ellipse class="pf-fur" cx="124" cy="223" rx="22" ry="10"/><path class="pf-toes" d="M116 219v5M124 218v6M132 219v5"/></g>
-      <path class="pf-scarf" d="M76 150Q100 162 124 150L100 186Z"/>
-      <circle class="pf-dot" cx="94" cy="163" r="2.4"/><circle class="pf-dot" cx="106" cy="163" r="2.4"/><circle class="pf-dot" cx="100" cy="173" r="2.4"/>
-      <ellipse class="pf-fur" cx="100" cy="110" rx="56" ry="48"/>
-      <path class="pf-line" d="M92 66Q96 54 100 64 104 54 108 66"/>
-      <ellipse class="pf-cheek" cx="68" cy="124" rx="9" ry="5.5"/>
-      <ellipse class="pf-cheek" cx="132" cy="124" rx="9" ry="5.5"/>
-      <g class="pf-eyes">
-        <circle cx="80" cy="106" r="7"/><circle cx="120" cy="106" r="7"/>
-        <circle class="pf-glint" cx="82.5" cy="103.5" r="2.2"/><circle class="pf-glint" cx="122.5" cy="103.5" r="2.2"/>
-      </g>
-      <path class="pf-teeth" d="M95.5 127H104.5V134Q100 136.5 95.5 134Z"/>
-      <path class="pf-nose" d="M93 115Q100 110 107 115 104 121 100 121 96 121 93 115Z"/>
-      <path class="pf-line" d="M100 121V126M100 126Q95 131 89 128M100 126Q105 131 111 128"/>
-      <path class="pf-line pf-whisk" d="M62 117 40 112M62 123 40 127M138 117 160 112M138 123 160 127"/>
-      <path class="pf-fur pf-arm pf-arm-l" d="M72 160C58 162 48 174 50 186 52 194 62 194 66 188 70 180 72 170 72 160Z"/>
-      <path class="pf-fur pf-arm pf-arm-r" d="M128 160C142 162 152 174 150 186 148 194 138 194 134 188 130 180 128 170 128 160Z"/>
-    </g>
-  </svg>
-</template>
-
-<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ============ NAV ============ -->
 <header class="nav">
   <div class="nav-inner">
     <a class="logo" href="#top" aria-label="Puffin home">
-      <svg class="logo-mark"><use href="#d-puffhead"/></svg>
-      <span>Puffin</span>
+      <img src="images/logo-lockup.png" alt="Puffin" width="1174" height="266">
     </a>
     <nav class="nav-menu" aria-label="Main">
       <a href="#about">About</a>
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#mission">Mission</a>
-      <a href="#values">Values</a>
+      <a href="#journal">Journal</a>
       <a href="#faq">FAQ</a>
-      <a class="nav-ask" href="#ask"><svg><use href="#d-sparkle"/></svg>Ask Puff</a>
-      <a class="btn btn-ink nav-menu-cta" href="#download">Get the app</a>
+      <a class="nav-ask" href="#ask"><svg><use href="#i-sparkles"/></svg>Ask Puff</a>
+      <a class="btn btn-dark nav-menu-cta" href="#download">Get the app</a>
     </nav>
-    <a class="btn btn-ink btn-sm nav-cta" href="#download">Get the app <svg><use href="#i-arrow"/></svg></a>
+    <a class="btn btn-dark btn-sm nav-cta" href="#download">Get the app</a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -241,160 +99,102 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="top">
-    <div class="hero-bg" aria-hidden="true">
-      <span class="blob blob--butter"></span>
-      <span class="blob blob--pink"></span>
-      <span class="blob blob--sky"></span>
-      <svg class="fd fd-1 doodle"><use href="#d-sparkle"/></svg>
-      <svg class="fd fd-2 doodle"><use href="#d-star"/></svg>
-      <svg class="fd fd-3 doodle"><use href="#d-sparkle"/></svg>
-      <svg class="fd fd-4 doodle"><use href="#d-heart"/></svg>
-    </div>
-
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow"><svg class="spin"><use href="#d-sparkle"/></svg>Pet care app · health, reminders &amp; vets</p>
-        <h1 class="hero-title">
-          <span class="w" style="--i:0">A</span>
-          <span class="w hl" style="--i:1">happier<svg class="hl-line" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C20 4 36 4 52 11S86 18 102 11 136 4 152 11 186 17 197 9" pathLength="1"/></svg></span>
-          <span class="w" style="--i:2">life</span>
-          <span class="w" style="--i:3">for</span>
-          <span class="w" style="--i:4">every</span>
-          <span class="w hl-paw" style="--i:5">paw.<svg class="title-paw" aria-hidden="true"><use href="#d-paw"/></svg></span>
-        </h1>
-        <p class="hero-lead">Puffin keeps your pet's health records, vaccine reminders, daily activity and nearby vet clinics together in one cheerful app — so caring for them feels easy, not overwhelming.</p>
+        <p class="label eyebrow">Pet care app · health, reminders &amp; vets</p>
+        <h1 class="hero-title">A <em>happier</em> life for every paw.</h1>
+        <p class="hero-lead">Puffin keeps your pet's health records, vaccine reminders, daily activity and nearby vet clinics together in one calm app — so caring for them feels easy, not overwhelming.</p>
         <div class="hero-actions">
-          <a class="btn-store btn-store--apple" href="#download"><svg><use href="#i-apple"/></svg><span><small>Download on the</small>App Store</span></a>
-          <a class="btn-store btn-store--play" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
+          <a class="btn-store" href="#download"><svg><use href="#i-apple"/></svg><span><small>Download on the</small>App Store</span></a>
+          <a class="btn-store" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
         </div>
-        <p class="hero-note">
-          <svg class="note-arrow" viewBox="0 0 100 50" aria-hidden="true"><path d="M8 44C24 40 52 30 70 10M58 9 71 9 72 22"/></svg>
-          Made for cats, dogs &amp; every paw in between
-        </p>
+        <p class="hero-note"><svg><use href="#d-paw"/></svg>Made for cats, dogs &amp; every paw in between</p>
       </div>
 
       <div class="hero-art">
-        <div class="mosaic" aria-hidden="true">
-          <div class="m-tile bg-butter" style="--i:0"><svg class="doodle spin-slow c-cream"><use href="#d-star"/></svg></div>
-          <div class="m-tile t-checker" style="--i:1"><span class="checker"></span></div>
-          <div class="m-tile bg-blush" style="--i:2"><svg class="doodle c-butter" style="--face:#2E2230"><use href="#d-cat"/></svg></div>
-          <div class="m-tile bg-sea" style="--i:3"><span class="m-word">Puffin</span></div>
-          <div class="m-tile bg-tangerine" style="--i:4"></div>
-          <div class="m-tile bg-paper" style="--i:5"><svg class="doodle wiggle c-tangerine"><use href="#d-flower"/></svg></div>
-          <div class="m-tile bg-pink" style="--i:6"><svg class="doodle c-cherry"><use href="#d-paw"/></svg></div>
-          <div class="m-tile bg-butter" style="--i:7"></div>
-          <div class="m-tile bg-olive" style="--i:8"><svg class="doodle c-cream" style="--ear:#F08C21;--snout:#F2D88F"><use href="#d-dog"/></svg></div>
-        </div>
+        <div class="hero-panel">
+          <img class="hero-watermark" src="images/logo-mark.png" alt="" aria-hidden="true" width="499" height="400">
 
-        <!-- Phone mockup -->
-        <div class="phone" aria-hidden="true">
-          <div class="screen">
-            <span class="island"></span>
-            <div class="status"><b>9:41</b><span class="status-ico"><i></i><i></i><i></i></span></div>
-            <div class="app-head">
-              <div><small>Good morning,</small><strong>Hi, Pawrents!</strong></div>
-              <span class="app-bell"><svg><use href="#i-bell"/></svg><i></i></span>
+          <!-- Phone mockup -->
+          <div class="phone" aria-hidden="true">
+            <div class="screen">
+              <span class="island"></span>
+              <div class="status"><b>9:41</b><span class="status-ico"><i></i><i></i><i></i></span></div>
+              <div class="app-head">
+                <div><small>Good morning,</small><strong>Hi, Pawrents!</strong></div>
+                <span class="app-bell"><svg><use href="#i-bell"/></svg><i></i></span>
+              </div>
+              <div class="app-pet">
+                <span class="av av--lg">N</span>
+                <div><b>Nala</b><small>British Shorthair · 2 yrs</small></div>
+                <span class="app-badge"><svg><use href="#i-heart"/></svg>Healthy</span>
+              </div>
+              <div class="app-chips">
+                <span class="chip is-on">All pets</span>
+                <span class="chip"><span class="av">N</span>Nala</span>
+                <span class="chip"><span class="av">B</span>Bobo</span>
+              </div>
+              <div class="app-card">
+                <div class="app-card-head"><b>Today</b><span class="task-count">1 of 3 done</span></div>
+                <ul class="tasks">
+                  <li class="task is-done"><span class="t-ico bg-tan"><svg><use href="#i-bowl"/></svg></span><span class="t-txt"><b>Breakfast</b><small>Nala · 07:30</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
+                  <li class="task"><span class="t-ico bg-sky"><svg><use href="#i-syringe"/></svg></span><span class="t-txt"><b>Rabies vaccine</b><small>Bobo · 10:00</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
+                  <li class="task"><span class="t-ico bg-cream-2"><svg><use href="#i-walk"/></svg></span><span class="t-txt"><b>Evening walk</b><small>Bobo · 17:30</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
+                </ul>
+              </div>
+              <div class="app-card">
+                <div class="app-card-head"><b>Bobo's walk</b><span>3.6 / 5 km</span></div>
+                <div class="bar"><i></i></div>
+              </div>
+              <nav class="app-tabs">
+                <span class="is-on"><svg><use href="#i-home"/></svg></span>
+                <span><svg><use href="#i-cal"/></svg></span>
+                <span><svg><use href="#i-pin"/></svg></span>
+                <span><svg><use href="#i-user"/></svg></span>
+              </nav>
             </div>
-            <div class="app-pet">
-              <span class="av av--lg bg-butter"><svg style="--face:#2E2230" class="c-blush"><use href="#d-cat"/></svg></span>
-              <div><b>Nala</b><small>British Shorthair · 2 yrs</small></div>
-              <span class="app-badge"><svg><use href="#i-heart"/></svg>Healthy</span>
-            </div>
-            <div class="app-chips">
-              <span class="chip is-on">All pets</span>
-              <span class="chip"><span class="av bg-blush"><svg class="c-butter"><use href="#d-cat"/></svg></span>Nala</span>
-              <span class="chip"><span class="av bg-sea"><svg class="c-cream" style="--ear:#F08C21"><use href="#d-dog"/></svg></span>Bobo</span>
-            </div>
-            <div class="app-card">
-              <div class="app-card-head"><b>Today</b><span class="task-count">1 of 3 done</span></div>
-              <ul class="tasks">
-                <li class="task is-done"><span class="t-ico bg-butter"><svg><use href="#i-bowl"/></svg></span><span class="t-txt"><b>Breakfast</b><small>Nala · 07:30</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
-                <li class="task"><span class="t-ico bg-sky"><svg><use href="#i-syringe"/></svg></span><span class="t-txt"><b>Rabies vaccine</b><small>Bobo · 10:00</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
-                <li class="task"><span class="t-ico bg-pink"><svg><use href="#i-walk"/></svg></span><span class="t-txt"><b>Evening walk</b><small>Bobo · 17:30</small></span><span class="t-check"><svg><use href="#i-check"/></svg></span></li>
-              </ul>
-            </div>
-            <div class="app-card app-walk">
-              <div class="app-card-head"><b>Bobo's walk</b><span>3.6 / 5 km</span></div>
-              <div class="bar"><i></i></div>
-            </div>
-            <nav class="app-tabs">
-              <span class="is-on"><svg><use href="#i-home"/></svg></span>
-              <span><svg><use href="#i-cal"/></svg></span>
-              <span><svg><use href="#i-pin"/></svg></span>
-              <span><svg><use href="#i-user"/></svg></span>
-            </nav>
           </div>
         </div>
 
         <div class="toast toast--1" aria-hidden="true">
-          <span class="toast-ico bg-blush"><svg><use href="#i-bell"/></svg></span>
+          <span class="toast-ico bg-sky"><svg><use href="#i-bell"/></svg></span>
           <span class="toast-txt"><b>Vaccine tomorrow</b><small>Bobo · Rabies booster, 10:00</small></span>
         </div>
         <div class="toast toast--2" aria-hidden="true">
-          <span class="toast-ico bg-sea"><svg><use href="#i-pin"/></svg></span>
+          <span class="toast-ico bg-tan"><svg><use href="#i-pin"/></svg></span>
           <span class="toast-txt"><b>Vet nearby</b><small>Happy Tails Clinic · 0.6 km</small></span>
         </div>
         <div class="toast toast--3" aria-hidden="true">
-          <span class="toast-ico bg-butter"><svg><use href="#i-chart"/></svg></span>
+          <span class="toast-ico bg-sky"><svg><use href="#i-chart"/></svg></span>
           <span class="toast-txt"><b>Nala is thriving</b><small>Weight stable · 4.2 kg</small></span>
         </div>
-        <button class="mascot hero-mascot is-waving" data-puffin aria-label="Say hi to Puff, the Puffin bunny"></button>
       </div>
     </div>
   </section>
 
-  <!-- ============ MARQUEE BANDS ============ -->
-  <div class="bands" aria-hidden="true">
-    <div class="band band--b">
-      <div class="band-track" data-loop>
-        <span>Compassion</span><svg><use href="#d-heart"/></svg>
-        <span>Responsibility</span><svg><use href="#d-heart"/></svg>
-        <span>Convenience</span><svg><use href="#d-heart"/></svg>
-        <span>Well-being</span><svg><use href="#d-heart"/></svg>
-        <span>Compassion</span><svg><use href="#d-heart"/></svg>
-        <span>Responsibility</span><svg><use href="#d-heart"/></svg>
-        <span>Convenience</span><svg><use href="#d-heart"/></svg>
-        <span>Well-being</span><svg><use href="#d-heart"/></svg>
-      </div>
-    </div>
-    <div class="band band--a">
-      <div class="band-track" data-loop>
-        <span>Health tracking</span><svg><use href="#d-sparkle"/></svg>
-        <span>Vaccine reminders</span><svg><use href="#d-sparkle"/></svg>
-        <span>Feeding times</span><svg><use href="#d-sparkle"/></svg>
-        <span>Daily activity</span><svg><use href="#d-sparkle"/></svg>
-        <span>Nearby vets</span><svg><use href="#d-sparkle"/></svg>
-        <span>Happy paws</span><svg><use href="#d-sparkle"/></svg>
-      </div>
-    </div>
+  <!-- ============ FEATURE STRIP ============ -->
+  <div class="strip" aria-label="What Puffin covers">
+    <ul class="container strip-inner">
+      <li>Health tracking</li>
+      <li>Vaccine reminders</li>
+      <li>Feeding times</li>
+      <li>Daily activity</li>
+      <li>Nearby vets</li>
+    </ul>
   </div>
 
   <!-- ============ ABOUT ============ -->
   <section class="section about" id="about">
     <div class="container about-grid">
-      <div class="about-collage">
-        <div class="ac-tile ac-1 bg-butter" data-reveal="pop">
-          <span class="mascot mascot--still" data-puffin></span>
-        </div>
-        <div class="ac-tile ac-2 bg-blush" data-reveal="pop" style="--d:120ms">
-          <svg class="doodle c-butter"><use href="#d-cat"/></svg>
-        </div>
-        <div class="ac-tile ac-3 bg-sea" data-reveal="pop" style="--d:240ms">
-          <svg class="doodle c-cream" style="--ear:#E36888;--snout:#F2D88F"><use href="#d-dog"/></svg>
-        </div>
-        <div class="ac-tile ac-4 bg-tangerine" data-reveal="pop" style="--d:360ms">
-          <strong>4-in-1</strong>
-          <span>care tools, one happy app</span>
-          <svg class="ac-spark spin-slow"><use href="#d-sparkle"/></svg>
-        </div>
+      <div class="about-visual" data-reveal>
+        <img src="images/logo-full.png" alt="Puffin — since 2026" width="800" height="859" loading="lazy">
       </div>
 
       <div class="about-copy">
-        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>About us</p>
-        <h2 class="h2" data-reveal style="--d:80ms">Pet care that's practical, organized — and <span class="c-blush">full of love.</span></h2>
+        <p class="label" data-reveal>About us</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Pet care that's practical, organized — and <em>full of love.</em></h2>
         <p class="lead" data-reveal style="--d:160ms">Puffin is a digital platform designed to help pet owners manage their pets' needs and well-being in a practical and organized way. Through health tracking, vaccination reminders, daily activity tracking and nearby veterinary clinic search, Puffin makes it easier to monitor your pet's health and activities in one convenient app.</p>
         <blockquote class="belief" data-reveal style="--d:240ms">
-          <svg class="belief-mark" viewBox="0 0 40 30" aria-hidden="true"><path d="M4 26c0-10 4-18 12-22M22 26c0-10 4-18 12-22"/></svg>
           <p>We believe every pet deserves proper attention and care to live a healthy and happy life.</p>
         </blockquote>
         <ul class="pill-row" data-reveal style="--d:320ms">
@@ -411,24 +211,24 @@
   <section class="section features" id="features">
     <div class="container">
       <div class="section-head center">
-        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>What Puffin does</p>
-        <h2 class="h2" data-reveal style="--d:80ms">All your pet's care, in one <span class="c-sea">cozy</span> place.</h2>
+        <p class="label" data-reveal>What Puffin does</p>
+        <h2 class="h2" data-reveal style="--d:80ms">All your pet's care, in one <em>calm</em> place.</h2>
         <p class="lead" data-reveal style="--d:160ms">Four everyday tools that work together, so nothing slips through the cracks — from the first vaccine to the hundredth walk.</p>
       </div>
 
-      <div class="bento">
-        <!-- Health tracking -->
-        <article class="bento-tile tile-wide bg-butter" data-reveal>
-          <div class="tile-copy">
-            <span class="tile-ico"><svg><use href="#i-pulse"/></svg></span>
-            <h3>Health tracking</h3>
-            <p>Log weight, symptoms, medication and vet visits. Puffin turns every entry into a tidy timeline and easy-to-read trends, so small changes get noticed early.</p>
-            <ul class="ticks">
-              <li><svg><use href="#i-check"/></svg>Weight &amp; body condition</li>
-              <li><svg><use href="#i-check"/></svg>Symptoms &amp; medication log</li>
-              <li><svg><use href="#i-check"/></svg>Complete vet visit history</li>
-            </ul>
-          </div>
+      <!-- Health tracking -->
+      <article class="feature">
+        <div class="feature-copy" data-reveal>
+          <span class="feature-num">01</span>
+          <h3>Health tracking</h3>
+          <p>Log weight, symptoms, medication and vet visits. Puffin turns every entry into a tidy timeline and easy-to-read trends, so small changes get noticed early.</p>
+          <ul class="ticks">
+            <li><svg><use href="#i-check"/></svg>Weight &amp; body condition</li>
+            <li><svg><use href="#i-check"/></svg>Symptoms &amp; medication log</li>
+            <li><svg><use href="#i-check"/></svg>Complete vet visit history</li>
+          </ul>
+        </div>
+        <div class="panel bg-sky" data-reveal style="--d:120ms">
           <div class="mock mock-chart">
             <div class="mock-head">
               <div><small>Nala's weight · 8 weeks</small><strong><span data-count="4.2" data-decimals="1">0.0</span> kg</strong></div>
@@ -445,21 +245,26 @@
             </svg>
             <div class="chart-x"><span>Sep</span><span>Oct</span><span>Nov</span></div>
             <div class="log-chips">
-              <span><i class="bg-olive"></i>Appetite · Good</span>
-              <span><i class="bg-blush"></i>Mood · Playful</span>
-              <span><i class="bg-sea"></i>Meds · Done</span>
+              <span><i class="d-1"></i>Appetite · Good</span>
+              <span><i class="d-2"></i>Mood · Playful</span>
+              <span><i class="d-3"></i>Meds · Done</span>
             </div>
           </div>
-          <svg class="tile-deco doodle spin-slow c-cream" aria-hidden="true"><use href="#d-star"/></svg>
-        </article>
+        </div>
+      </article>
 
-        <!-- Reminders -->
-        <article class="bento-tile tile-narrow bg-blush" data-reveal style="--d:120ms">
-          <div class="tile-copy">
-            <span class="tile-ico"><svg><use href="#i-bell"/></svg></span>
-            <h3>Vaccine &amp; feeding reminders</h3>
-            <p>Set it once and relax. Puffin nudges you about vaccines, meds, grooming and feeding times — right when it matters.</p>
-          </div>
+      <!-- Reminders -->
+      <article class="feature feature--flip">
+        <div class="feature-copy" data-reveal>
+          <span class="feature-num">02</span>
+          <h3>Vaccine &amp; feeding reminders</h3>
+          <p>Set it once and relax. Puffin nudges you about vaccines, meds, grooming and feeding times — right when it matters.</p>
+          <ul class="ticks">
+            <li><svg><use href="#i-check"/></svg>Vaccine &amp; booster schedule</li>
+            <li><svg><use href="#i-check"/></svg>Daily feeding &amp; medication times</li>
+          </ul>
+        </div>
+        <div class="panel bg-tan" data-reveal style="--d:120ms">
           <div class="mock mock-remind">
             <div class="remind remind--next">
               <span class="remind-tag">Tomorrow</span>
@@ -471,95 +276,103 @@
             </div>
             <div class="remind">
               <div class="remind-row">
-                <span class="r-ico bg-butter"><svg><use href="#i-bowl"/></svg></span>
+                <span class="r-ico bg-tan"><svg><use href="#i-bowl"/></svg></span>
                 <span class="r-txt"><b>Dinner time</b><small>Nala · 18:00 · daily</small></span>
                 <span class="switch" style="--d:500ms"></span>
               </div>
             </div>
             <div class="remind">
               <div class="remind-row">
-                <span class="r-ico bg-pink"><svg><use href="#i-heart"/></svg></span>
+                <span class="r-ico bg-sky"><svg><use href="#i-heart"/></svg></span>
                 <span class="r-txt"><b>Flea &amp; tick drops</b><small>Bobo · every 30 days</small></span>
                 <span class="switch" style="--d:800ms"></span>
               </div>
             </div>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Activity -->
-        <article class="bento-tile tile-narrow bg-sea" data-reveal>
-          <div class="tile-copy">
-            <span class="tile-ico"><svg><use href="#i-walk"/></svg></span>
-            <h3>Daily activity</h3>
-            <p>Track walks, playtime and meals to keep a happy, healthy routine — and see how today compares.</p>
-          </div>
+      <!-- Activity -->
+      <article class="feature">
+        <div class="feature-copy" data-reveal>
+          <span class="feature-num">03</span>
+          <h3>Daily activity</h3>
+          <p>Track walks, playtime and meals to keep a happy, healthy routine — and see how today compares.</p>
+          <ul class="ticks">
+            <li><svg><use href="#i-check"/></svg>Walks, play &amp; meals in one view</li>
+            <li><svg><use href="#i-check"/></svg>Daily goals for every pet</li>
+          </ul>
+        </div>
+        <div class="panel bg-sky" data-reveal style="--d:120ms">
           <div class="mock mock-activity">
             <svg class="rings" viewBox="0 0 140 140" aria-hidden="true">
               <g transform="rotate(-90 70 70)">
-                <circle class="ring-track" cx="70" cy="70" r="58" style="--c:var(--tangerine)"/>
-                <circle class="ring" cx="70" cy="70" r="58" pathLength="100" style="--c:var(--tangerine);--off:28"/>
-                <circle class="ring-track" cx="70" cy="70" r="44" style="--c:var(--blush)"/>
-                <circle class="ring" cx="70" cy="70" r="44" pathLength="100" style="--c:var(--blush);--off:45;--d:200ms"/>
-                <circle class="ring-track" cx="70" cy="70" r="30" style="--c:var(--olive)"/>
-                <circle class="ring" cx="70" cy="70" r="30" pathLength="100" style="--c:var(--olive);--off:33;--d:400ms"/>
+                <circle class="ring-track" cx="70" cy="70" r="58" style="--c:#341F1A"/>
+                <circle class="ring" cx="70" cy="70" r="58" pathLength="100" style="--c:#341F1A;--off:28"/>
+                <circle class="ring-track" cx="70" cy="70" r="44" style="--c:#6F9FA3"/>
+                <circle class="ring" cx="70" cy="70" r="44" pathLength="100" style="--c:#6F9FA3;--off:45;--d:200ms"/>
+                <circle class="ring-track" cx="70" cy="70" r="30" style="--c:#B79B5C"/>
+                <circle class="ring" cx="70" cy="70" r="30" pathLength="100" style="--c:#B79B5C;--off:33;--d:400ms"/>
               </g>
               <use href="#d-paw" x="57" y="57" width="26" height="26" class="rings-paw"/>
             </svg>
             <ul class="ring-legend">
-              <li><i class="bg-tangerine"></i><span>Walk</span><b><span data-count="3.6" data-decimals="1">0.0</span> km</b></li>
-              <li><i class="bg-blush"></i><span>Play</span><b><span data-count="40">0</span> min</b></li>
-              <li><i class="bg-olive"></i><span>Meals</span><b>2 / 3</b></li>
+              <li><i style="background:#341F1A"></i><span>Walk</span><b><span data-count="3.6" data-decimals="1">0.0</span> km</b></li>
+              <li><i style="background:#6F9FA3"></i><span>Play</span><b><span data-count="40">0</span> min</b></li>
+              <li><i style="background:#B79B5C"></i><span>Meals</span><b>2 / 3</b></li>
             </ul>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Vets -->
-        <article class="bento-tile tile-wide bg-tangerine" data-reveal style="--d:120ms">
-          <div class="tile-copy">
-            <span class="tile-ico"><svg><use href="#i-pin"/></svg></span>
-            <h3>Nearby vet clinics</h3>
-            <p>Find veterinary clinics and animal healthcare services around you — with distance, opening hours and one-tap directions when you need them most.</p>
-            <ul class="ticks">
-              <li><svg><use href="#i-check"/></svg>Clinics, hospitals &amp; groomers</li>
-              <li><svg><use href="#i-check"/></svg>Open-now &amp; 24-hour filters</li>
-            </ul>
-          </div>
+      <!-- Vets -->
+      <article class="feature feature--flip">
+        <div class="feature-copy" data-reveal>
+          <span class="feature-num">04</span>
+          <h3>Nearby vet clinics</h3>
+          <p>Find veterinary clinics and animal healthcare services around you — with distance, opening hours and one-tap directions when you need them most.</p>
+          <ul class="ticks">
+            <li><svg><use href="#i-check"/></svg>Clinics, hospitals &amp; groomers</li>
+            <li><svg><use href="#i-check"/></svg>Open-now &amp; 24-hour filters</li>
+          </ul>
+        </div>
+        <div class="panel bg-tan" data-reveal style="--d:120ms">
           <div class="mock mock-vets">
             <svg class="map" viewBox="0 0 320 200" aria-hidden="true">
-              <rect width="320" height="200" rx="16" fill="#F7E7D0"/>
-              <path d="M196 14C238 4 292 20 302 56 308 86 272 96 242 88 212 82 182 46 196 14Z" fill="#CDD38A"/>
-              <path d="M24 160C14 140 30 118 54 124 74 130 80 156 64 170 48 182 30 176 24 160Z" fill="#CDD38A"/>
-              <path d="M-10 186C60 160 110 206 170 182S270 140 330 160" fill="none" stroke="#A9C9EE" stroke-width="16" stroke-linecap="round"/>
-              <path d="M0 74H320M118 0V200M0 126C80 116 200 136 320 106M232 0 192 200" fill="none" stroke="#FFF9EF" stroke-width="10" stroke-linecap="round"/>
-              <path class="map-route" d="M118 126C150 124 178 114 196 90" fill="none" stroke="#2E2230" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
+              <rect width="320" height="200" rx="16" fill="#FFF8E7"/>
+              <path d="M196 14C238 4 292 20 302 56 308 86 272 96 242 88 212 82 182 46 196 14Z" fill="#CFE1E2"/>
+              <path d="M24 160C14 140 30 118 54 124 74 130 80 156 64 170 48 182 30 176 24 160Z" fill="#CFE1E2"/>
+              <path d="M-10 186C60 160 110 206 170 182S270 140 330 160" fill="none" stroke="#B9D3D5" stroke-width="16" stroke-linecap="round"/>
+              <path d="M0 74H320M118 0V200M0 126C80 116 200 136 320 106M232 0 192 200" fill="none" stroke="#EFE1BC" stroke-width="9" stroke-linecap="round"/>
+              <path class="map-route" d="M118 126C150 124 178 114 196 90" fill="none" stroke="#341F1A" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
               <g transform="translate(118 126)">
                 <circle class="radar" r="9"/><circle class="radar radar--2" r="9"/>
-                <circle r="8" fill="#6698CC" stroke="#FFF9EF" stroke-width="3"/>
+                <circle r="8" fill="#6F9FA3" stroke="#FFF8E7" stroke-width="3"/>
               </g>
-              <g transform="translate(196 90)"><g class="map-pin" style="--i:0"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#E36888" stroke="#2E2230" stroke-width="2.5"/><circle cy="-23" r="5" fill="#FFF9EF"/></g></g>
-              <g transform="translate(62 62)"><g class="map-pin" style="--i:1"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#F08C21" stroke="#2E2230" stroke-width="2.5"/><circle cy="-23" r="5" fill="#FFF9EF"/></g></g>
-              <g transform="translate(270 146)"><g class="map-pin" style="--i:2"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#F08C21" stroke="#2E2230" stroke-width="2.5"/><circle cy="-23" r="5" fill="#FFF9EF"/></g></g>
+              <g transform="translate(196 90)"><g class="map-pin" style="--i:0"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#341F1A"/><circle cy="-23" r="5" fill="#FFF8E7"/></g></g>
+              <g transform="translate(62 62)"><g class="map-pin" style="--i:1"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#6B5750"/><circle cy="-23" r="5" fill="#FFF8E7"/></g></g>
+              <g transform="translate(270 146)"><g class="map-pin" style="--i:2"><path d="M0 0C-9-11-14-17-14-23A14 14 0 0 1 14-23C14-17 9-11 0 0Z" fill="#6B5750"/><circle cy="-23" r="5" fill="#FFF8E7"/></g></g>
             </svg>
             <ul class="clinics">
               <li class="is-near">
-                <span class="cl-ico bg-blush"><svg><use href="#i-pin"/></svg></span>
+                <span class="cl-ico bg-sky"><svg><use href="#i-pin"/></svg></span>
                 <span class="cl-txt"><b>Happy Tails Vet Clinic</b><small>0.6 km · <em>Open now</em></small></span>
                 <span class="cl-rate"><svg><use href="#i-rate"/></svg>4.9</span>
               </li>
               <li>
-                <span class="cl-ico bg-butter"><svg><use href="#i-pin"/></svg></span>
+                <span class="cl-ico bg-tan"><svg><use href="#i-pin"/></svg></span>
                 <span class="cl-txt"><b>Paws &amp; Claws Hospital</b><small>1.2 km · <em>24 hours</em></small></span>
                 <span class="cl-rate"><svg><use href="#i-rate"/></svg>4.8</span>
               </li>
               <li>
-                <span class="cl-ico bg-butter"><svg><use href="#i-pin"/></svg></span>
+                <span class="cl-ico bg-tan"><svg><use href="#i-pin"/></svg></span>
                 <span class="cl-txt"><b>Whisker Wellness Center</b><small>2.0 km · Closes 20:00</small></span>
                 <span class="cl-rate"><svg><use href="#i-rate"/></svg>4.7</span>
               </li>
             </ul>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -567,42 +380,22 @@
   <section class="section how" id="how">
     <div class="container">
       <div class="section-head center">
-        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>How it works</p>
-        <h2 class="h2" data-reveal style="--d:80ms">Set it up once. <span class="c-tangerine">Puffin</span> handles the remembering.</h2>
+        <p class="label" data-reveal>How it works</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Set it up once. <em>Puffin</em> handles the remembering.</h2>
       </div>
 
       <div class="steps">
-        <svg class="how-path" viewBox="0 0 1000 160" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <mask id="howMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="160">
-              <path id="howMaskPath" d="M40 80C190 0 300 160 500 80S810 0 960 80" fill="none" stroke="#fff" stroke-width="60" pathLength="1"/>
-            </mask>
-          </defs>
-          <path class="how-dash" d="M40 80C190 0 300 160 500 80S810 0 960 80" mask="url(#howMask)"/>
-        </svg>
-
         <article class="step" data-reveal>
-          <div class="step-art bg-blush">
-            <svg class="doodle c-butter"><use href="#d-cat"/></svg>
-            <span class="step-plus"><svg><use href="#i-plus"/></svg></span>
-          </div>
           <span class="step-num">01</span>
           <h3>Add your pet</h3>
           <p>Create a profile with their name, breed, age and health notes. It only takes a minute.</p>
         </article>
-        <article class="step" data-reveal style="--d:150ms">
-          <div class="step-art bg-butter">
-            <svg class="step-bell"><use href="#i-bell"/></svg>
-            <svg class="step-spark spin-slow"><use href="#d-sparkle"/></svg>
-          </div>
+        <article class="step" data-reveal style="--d:140ms">
           <span class="step-num">02</span>
           <h3>Build their routine</h3>
           <p>Pick reminders for vaccines, meds, meals and walks — or customise them to fit your day.</p>
         </article>
-        <article class="step" data-reveal style="--d:300ms">
-          <div class="step-art bg-sea">
-            <svg class="doodle c-tangerine heartbeat" style="--face:#2E2230"><use href="#d-heart-face"/></svg>
-          </div>
+        <article class="step" data-reveal style="--d:280ms">
           <span class="step-num">03</span>
           <h3>Relax &amp; enjoy</h3>
           <p>Get nudges at the right time, see their progress and find a vet fast whenever you need one.</p>
@@ -614,60 +407,53 @@
   <!-- ============ VISION & MISSION ============ -->
   <section class="section mission" id="mission">
     <div class="container">
-      <div class="vision bg-sea" data-reveal>
+      <div class="vision" data-reveal>
         <div class="vision-copy">
-          <p class="label label--cream"><svg><use href="#d-sparkle"/></svg>Our vision</p>
-          <p class="vision-quote">To become a trusted digital platform that supports pet well-being through easy, practical, and integrated health and activity management.</p>
+          <p class="label label--light">Our vision</p>
+          <p class="vision-quote">To become a trusted digital platform that supports pet well-being through <em>easy, practical, and integrated</em> health and activity management.</p>
         </div>
-        <div class="vision-art" aria-hidden="true">
-          <span class="mascot mascot--still vision-mascot" data-puffin></span>
-          <svg class="vs vs-1 doodle twinkle"><use href="#d-star"/></svg>
-          <svg class="vs vs-2 twinkle"><use href="#d-sparkle"/></svg>
-          <svg class="vs vs-3 twinkle"><use href="#d-sparkle"/></svg>
-          <svg class="vs vs-4 doodle twinkle"><use href="#d-star"/></svg>
-        </div>
-        <span class="vision-word" aria-hidden="true">Vision</span>
+        <img class="vision-mark" src="images/logo-mark-cream.png" alt="" aria-hidden="true" width="499" height="400" loading="lazy">
       </div>
 
       <div class="section-head mission-head">
-        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>Our mission</p>
-        <h2 class="h2" data-reveal style="--d:80ms">Five promises we make to <span class="c-blush">every pet parent.</span></h2>
+        <p class="label" data-reveal>Our mission</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Five promises we make to <em>every pet parent.</em></h2>
       </div>
 
       <div class="mission-grid">
-        <article class="m-card bg-butter" data-reveal>
+        <article class="m-card" data-reveal>
           <span class="m-num">01</span>
           <span class="m-ico"><svg><use href="#i-chart"/></svg></span>
           <h3>Monitor with ease</h3>
           <p>To make it easier for pet owners to monitor their pets' health and development.</p>
         </article>
-        <article class="m-card bg-pink" data-reveal style="--d:100ms">
+        <article class="m-card" data-reveal style="--d:100ms">
           <span class="m-num">02</span>
           <span class="m-ico"><svg><use href="#i-bell"/></svg></span>
           <h3>Never miss a moment</h3>
           <p>To provide reminders for vaccination schedules, feeding times, and daily activities.</p>
         </article>
-        <article class="m-card bg-sky" data-reveal style="--d:200ms">
+        <article class="m-card" data-reveal style="--d:200ms">
           <span class="m-num">03</span>
           <span class="m-ico"><svg><use href="#i-pin"/></svg></span>
           <h3>Care close to home</h3>
           <p>To help pet owners access information about nearby veterinary clinics and animal healthcare services.</p>
         </article>
-        <article class="m-card bg-tangerine" data-reveal>
+        <article class="m-card" data-reveal>
           <span class="m-num">04</span>
           <span class="m-ico"><svg><use href="#i-heart"/></svg></span>
           <h3>Champion responsible care</h3>
           <p>To raise awareness of the importance of responsible pet care and animal well-being.</p>
         </article>
-        <article class="m-card bg-olive" data-reveal style="--d:100ms">
+        <article class="m-card" data-reveal style="--d:100ms">
           <span class="m-num">05</span>
           <span class="m-ico"><svg><use href="#i-sparkles"/></svg></span>
           <h3>Organized, the digital way</h3>
           <p>To create a more organized pet care experience through digital technology.</p>
         </article>
-        <div class="m-card m-card--mascot" data-reveal style="--d:200ms">
-          <span class="mascot is-waving m-mascot" data-puffin></span>
-          <p class="m-hand">Five promises,<br>one very happy bunny!</p>
+        <div class="m-card m-card--brand" data-reveal style="--d:200ms">
+          <img src="images/logo-mark.png" alt="" aria-hidden="true" width="499" height="400" loading="lazy">
+          <p>Five promises,<br>one happy paw.</p>
         </div>
       </div>
     </div>
@@ -677,30 +463,30 @@
   <section class="section values" id="values">
     <div class="container">
       <div class="section-head center">
-        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>Core values</p>
-        <h2 class="h2" data-reveal style="--d:80ms">What we stand for, <span class="c-sea">paw on heart.</span></h2>
+        <p class="label" data-reveal>Core values</p>
+        <h2 class="h2" data-reveal style="--d:80ms">What we stand for, <em>paw on heart.</em></h2>
       </div>
       <div class="values-grid">
-        <article class="v-card bg-blush" data-reveal="pop">
-          <svg class="v-doodle doodle c-butter" style="--face:#2E2230"><use href="#d-heart-face"/></svg>
+        <article class="v-card" data-reveal>
+          <span class="v-ico"><svg><use href="#i-heart"/></svg></span>
           <span class="v-num">01</span>
           <h3>Compassion</h3>
           <p>Prioritizing love, kindness, and genuine care for every pet.</p>
         </article>
-        <article class="v-card bg-sea" data-reveal="pop" style="--d:120ms">
-          <svg class="v-doodle doodle c-cream" style="--face:#2E2230"><use href="#d-shield-face"/></svg>
+        <article class="v-card" data-reveal style="--d:100ms">
+          <span class="v-ico"><svg><use href="#i-shield"/></svg></span>
           <span class="v-num">02</span>
           <h3>Responsibility</h3>
           <p>Encouraging pet owners to take responsibility for their pets' health, needs, and overall care.</p>
         </article>
-        <article class="v-card bg-butter" data-reveal="pop" style="--d:240ms">
-          <svg class="v-doodle doodle c-tangerine" style="--face:#2E2230"><use href="#d-star-face"/></svg>
+        <article class="v-card" data-reveal style="--d:200ms">
+          <span class="v-ico"><svg><use href="#i-bolt"/></svg></span>
           <span class="v-num">03</span>
           <h3>Convenience</h3>
           <p>Providing practical and accessible solutions to make pet care easier and more manageable.</p>
         </article>
-        <article class="v-card bg-olive" data-reveal="pop" style="--d:360ms">
-          <svg class="v-doodle doodle c-pink" style="--face:#2E2230"><use href="#d-flower"/></svg>
+        <article class="v-card" data-reveal style="--d:300ms">
+          <span class="v-ico"><svg><use href="#i-sparkles"/></svg></span>
           <span class="v-num">04</span>
           <h3>Well-being</h3>
           <p>Supporting pets' quality of life by prioritizing their physical health and emotional well-being.</p>
@@ -709,38 +495,12 @@
     </div>
   </section>
 
-  <!-- ============ TILE BELT (Daisy-style pattern) ============ -->
-  <div class="belt" aria-hidden="true">
-    <div class="belt-row" data-loop>
-      <div class="b-tile bg-butter"><svg class="doodle c-cream"><use href="#d-star"/></svg></div>
-      <div class="b-tile bg-pink"><svg class="kid c-blush" style="--pants:#A9C9EE"><use href="#d-flowerkid"/></svg></div>
-      <div class="b-tile bg-cherry"><span class="b-mono">Pf</span></div>
-      <div class="b-tile bg-paper"><svg class="doodle c-butter"><use href="#d-star"/></svg></div>
-      <div class="b-tile bg-olive"><svg class="doodle c-cream"><use href="#d-flower"/></svg></div>
-      <div class="b-tile t-checker"><span class="checker"></span></div>
-      <div class="b-tile bg-sky"><span class="b-word">Puffin</span></div>
-      <div class="b-tile bg-paper"><svg class="kid c-tangerine" style="--pants:#E36888"><use href="#d-flowerkid"/></svg></div>
-      <div class="b-tile bg-tangerine"><span class="b-word b-word--butter">Every<br>paw</span></div>
-    </div>
-    <div class="belt-row belt-row--rev" data-loop>
-      <div class="b-tile bg-paper"><span class="mascot mascot--still" data-puffin></span></div>
-      <div class="b-tile bg-blush"><svg class="doodle c-butter"><use href="#d-cat"/></svg></div>
-      <div class="b-tile bg-butter"><svg class="kid c-olive" style="--pants:#F08C21"><use href="#d-flowerkid"/></svg></div>
-      <div class="b-tile t-checker t-checker--pink"><span class="checker"></span></div>
-      <div class="b-tile bg-sea"><svg class="doodle c-cream" style="--ear:#F08C21;--snout:#F2D88F"><use href="#d-dog"/></svg></div>
-      <div class="b-tile bg-pink"><svg class="doodle c-cherry"><use href="#d-paw"/></svg></div>
-      <div class="b-tile bg-olive"><span class="b-mono b-mono--cream">Pf</span></div>
-      <div class="b-tile bg-paper"><svg class="doodle c-blush"><use href="#d-heart"/></svg></div>
-      <div class="b-tile bg-sky"><svg class="doodle c-cream"><use href="#d-star"/></svg></div>
-    </div>
-  </div>
-
   <!-- ============ JOURNAL ============ -->
   <section class="section journal" id="journal">
     <div class="container">
       <div class="section-head center">
-        <p class="label" data-reveal><svg><use href="#i-book"/></svg>Puffin Journal</p>
-        <h2 class="h2" data-reveal style="--d:80ms">Tips &amp; stories for <span class="c-tangerine">pet parents.</span></h2>
+        <p class="label" data-reveal>Puffin Journal</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Tips &amp; stories for <em>pet parents.</em></h2>
       </div>
 
       <article class="journal-card" data-reveal>
@@ -749,7 +509,7 @@
           <span class="journal-badge" lang="id">Kesehatan</span>
         </a>
         <div class="journal-copy">
-          <p class="journal-meta"><span><svg><use href="#d-puffhead"/></svg>Puffin Journal</span><span lang="id"><svg><use href="#i-clock"/></svg>2 menit baca</span></p>
+          <p class="journal-meta"><span><svg><use href="#i-book"/></svg>Puffin Journal</span><span lang="id"><svg><use href="#i-clock"/></svg>2 menit baca</span></p>
           <h3 lang="id"><a href="article.html">Mereka Gabisa Bilang Sedang Sakit. Ini 5 Tanda yang Wajib Puffies Kenali!</a></h3>
           <p lang="id">Anabul tidak bisa memberi tahu kita ketika tubuhnya terasa sakit. Kenali perubahan kecil dalam kebiasaan mereka sebelum jadi masalah besar.</p>
           <ul class="journal-signs" lang="id">
@@ -759,9 +519,8 @@
             <li><i>4</i>Penampilan berubah</li>
             <li><i>5</i>Napas tidak normal</li>
           </ul>
-          <a class="btn btn-ink" href="article.html">View Article <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-dark" href="article.html">View Article <svg><use href="#i-arrow"/></svg></a>
         </div>
-        <svg class="journal-deco doodle spin-slow" aria-hidden="true"><use href="#d-star"/></svg>
       </article>
     </div>
   </section>
@@ -770,10 +529,10 @@
   <section class="section faq" id="faq">
     <div class="container faq-grid">
       <div class="faq-intro">
-        <p class="label" data-reveal><svg><use href="#d-paw"/></svg>FAQ</p>
-        <h2 class="h2" data-reveal style="--d:80ms">Questions? We've got <span class="c-tangerine">answers.</span></h2>
+        <p class="label" data-reveal>FAQ</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Questions? We've got <em>answers.</em></h2>
         <p class="lead" data-reveal style="--d:160ms">Can't find what you're looking for? Drop us a line and a real human (with a real pet) will get back to you.</p>
-        <a class="btn btn-ghost" href="mailto:hello@puffin.app" data-reveal style="--d:240ms"><svg><use href="#i-mail"/></svg>hello@puffin.app</a>
+        <a class="btn btn-outline" href="mailto:hello@puffin.app" data-reveal style="--d:240ms"><svg><use href="#i-mail"/></svg>hello@puffin.app</a>
       </div>
       <div class="faq-list">
         <div class="faq-item is-open" data-reveal>
@@ -804,22 +563,21 @@
   <section class="section ask" id="ask">
     <div class="container ask-grid">
       <div class="ask-intro">
-        <p class="label" data-reveal><svg><use href="#d-sparkle"/></svg>Ask Puff · AI care buddy</p>
-        <h2 class="h2" data-reveal style="--d:80ms">Got a pet question? <span class="c-blush">Ask Puff.</span></h2>
+        <p class="label" data-reveal>Ask Puff · AI care buddy</p>
+        <h2 class="h2" data-reveal style="--d:80ms">Got a pet question? <em>Ask Puff.</em></h2>
         <p class="lead" data-reveal style="--d:160ms">Puff answers everyday questions about food, vaccines, grooming, behaviour and health in seconds. Try 3 questions free right here — the full, unlimited assistant lives in the Puffin app.</p>
         <ul class="ask-perks" data-reveal style="--d:240ms">
-          <li><span class="bg-butter"><svg><use href="#i-bolt"/></svg></span>Instant answers, day or night</li>
-          <li><span class="bg-pink"><svg><use href="#i-heart"/></svg></span>Tips for cats, dogs &amp; bunnies</li>
-          <li><span class="bg-sky"><svg><use href="#i-pin"/></svg></span>Knows when it's time to see a vet</li>
+          <li><span><svg><use href="#i-bolt"/></svg></span>Instant answers, day or night</li>
+          <li><span><svg><use href="#i-heart"/></svg></span>Tips for cats, dogs &amp; bunnies</li>
+          <li><span><svg><use href="#i-pin"/></svg></span>Knows when it's time to see a vet</li>
         </ul>
         <p class="ask-disclaimer" data-reveal style="--d:320ms">Puff shares general pet-care tips, not veterinary diagnoses. In an emergency, contact your vet straight away.</p>
       </div>
 
-      <div class="chat-wrap" data-reveal="pop" style="--d:120ms">
-        <span class="mascot chat-mascot" data-puffin aria-hidden="true"></span>
+      <div class="chat-wrap" data-reveal style="--d:120ms">
         <div class="chat" id="chat">
           <header class="chat-head">
-            <span class="chat-av"><svg><use href="#d-puffhead"/></svg></span>
+            <span class="chat-av"><img src="images/logo-mark.png" alt="" width="499" height="400"></span>
             <div class="chat-id"><b>Puff</b><small><i></i>AI care buddy</small></div>
             <div class="chat-quota" aria-live="polite">
               <span class="quota-paws" aria-hidden="true"><svg><use href="#d-paw"/></svg><svg><use href="#d-paw"/></svg><svg><use href="#d-paw"/></svg></span>
@@ -837,7 +595,7 @@
             <p><b>Keep chatting with Puff</b>Unlimited questions, personalised to your pet — in the app.</p>
             <div class="chat-lock-btns">
               <a class="btn-store btn-store--sm" href="#download"><svg><use href="#i-apple"/></svg><span><small>Download on the</small>App Store</span></a>
-              <a class="btn-store btn-store--sm btn-store--play" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
+              <a class="btn-store btn-store--sm" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
             </div>
           </div>
         </div>
@@ -849,20 +607,16 @@
   <!-- ============ CTA ============ -->
   <section class="section cta" id="download">
     <div class="container">
-      <div class="cta-panel bg-tangerine" data-reveal="pop">
-        <div class="cta-tiles" aria-hidden="true">
-          <span class="ct ct-1 bg-butter"><svg class="doodle c-cream spin-slow"><use href="#d-star"/></svg></span>
-          <span class="ct ct-2 bg-blush"><svg class="doodle c-butter"><use href="#d-flower"/></svg></span>
-          <span class="ct ct-3 bg-sea"><svg class="doodle c-cream"><use href="#d-paw"/></svg></span>
-          <span class="ct ct-4 t-checker"><span class="checker"></span></span>
-        </div>
-        <span class="mascot is-waving cta-mascot" data-puffin aria-hidden="true"></span>
+      <div class="cta-panel" data-reveal>
+        <img class="cta-deco cta-deco--l" src="images/logo-mark-cream.png" alt="" aria-hidden="true" width="499" height="400" loading="lazy">
+        <img class="cta-deco cta-deco--r" src="images/logo-mark-cream.png" alt="" aria-hidden="true" width="499" height="400" loading="lazy">
         <div class="cta-copy">
-          <h2 class="cta-title">Ready for happier days together?</h2>
+          <img class="cta-mark" src="images/logo-mark-cream.png" alt="" aria-hidden="true" width="499" height="400" loading="lazy">
+          <h2 class="cta-title">Ready for <em>happier days</em> together?</h2>
           <p>Download Puffin and give every paw the care, attention and love it deserves.</p>
-          <div class="hero-actions cta-actions">
-            <a class="btn-store btn-store--apple" href="#download"><svg><use href="#i-apple"/></svg><span><small>Download on the</small>App Store</span></a>
-            <a class="btn-store btn-store--play" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
+          <div class="cta-actions">
+            <a class="btn-store btn-store--light" href="#download"><svg><use href="#i-apple"/></svg><span><small>Download on the</small>App Store</span></a>
+            <a class="btn-store btn-store--light" href="#download"><svg><use href="#i-play"/></svg><span><small>Get it on</small>Google Play</span></a>
           </div>
         </div>
       </div>
@@ -874,10 +628,10 @@
 <footer class="footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a class="logo logo--light" href="#top" aria-label="Puffin home">
-        <svg class="logo-mark"><use href="#d-puffhead"/></svg><span>Puffin</span>
+      <a class="logo" href="#top" aria-label="Puffin home">
+        <img src="images/logo-lockup.png" alt="Puffin" width="1174" height="266" loading="lazy">
       </a>
-      <p>A happier life for every paw. Health, reminders, activity and vets — all in one cozy app.</p>
+      <p>A happier life for every paw. Health, reminders, activity and vets — all in one calm app.</p>
       <div class="socials">
         <a href="#" aria-label="Instagram"><svg><use href="#i-insta"/></svg></a>
         <a href="#" aria-label="TikTok"><svg><use href="#i-tiktok"/></svg></a>
@@ -910,16 +664,13 @@
     </div>
   </div>
   <div class="container footer-bottom">
-    <span>© <span data-year>2026</span> Puffin. Made with love for every paw.</span>
+    <span>© <span data-year>2026</span> Puffin. Since 2026 · Made with love for every paw.</span>
     <span class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a></span>
-  </div>
-  <div class="footer-word" aria-hidden="true">
-    <span>P</span><span>u</span><span>f</span><span>f</span><span>i</span><span>n</span>
   </div>
 </footer>
 
-<script src="js/main.js?v=7" defer></script>
-<script src="js/puff-knowledge.js?v=7" defer></script>
-<script src="js/assistant.js?v=7" defer></script>
+<script src="js/main.js?v=10" defer></script>
+<script src="js/puff-knowledge.js?v=10" defer></script>
+<script src="js/assistant.js?v=10" defer></script>
 </body>
 </html>
