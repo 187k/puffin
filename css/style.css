@@ -202,7 +202,34 @@ ul, ol { padding: 0; list-style: none; }
 /* =========================================================
    HERO
    ========================================================= */
-.hero { position: relative; padding: calc(var(--nav-h) + clamp(36px, 6vw, 72px)) 0 clamp(56px, 7vw, 96px); }
+.hero { position: relative; padding: clamp(56px, 7vw, 96px) 0; }
+
+/* =========================================================
+   BANNER (full-bleed carousel)
+   ========================================================= */
+.banner { position: relative; margin-top: var(--nav-h); height: clamp(380px, 68vh, 680px); background: var(--espresso); overflow: hidden; }
+.banner-track { position: absolute; inset: 0; }
+.banner-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .9s var(--ease), visibility .9s; }
+.banner-slide.is-active { opacity: 1; visibility: visible; }
+.banner-slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 7s linear; }
+.banner-slide.is-active img { transform: scale(1); }
+.banner-slide:not(.banner-slide--plain)::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(52, 31, 26, .62), rgba(52, 31, 26, 0) 55%); pointer-events: none; }
+.banner-slide figcaption { position: absolute; z-index: 1; left: 0; right: 0; bottom: clamp(64px, 11vh, 110px); text-align: center; padding-inline: 72px; color: var(--cream); font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1; letter-spacing: -.015em; text-shadow: 0 2px 24px rgba(52, 31, 26, .45); }
+.banner-slide.is-active figcaption span { display: inline-block; animation: fade-up 1s var(--ease) both .25s; }
+.banner-arrow { position: absolute; z-index: 2; top: 50%; translate: 0 -50%; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 248, 231, .88); color: var(--espresso); transition: background .25s, transform .25s var(--ease); }
+.banner-arrow:hover { background: var(--cream); transform: scale(1.08); }
+.banner-arrow svg { width: 20px; height: 20px; }
+.banner-prev { left: clamp(12px, 3vw, 32px); }
+.banner-prev svg { rotate: 180deg; }
+.banner-next { right: clamp(12px, 3vw, 32px); }
+.banner-dots { position: absolute; z-index: 2; left: 0; right: 0; bottom: 22px; display: flex; justify-content: center; gap: 10px; }
+.banner-dots button { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 248, 231, .5); transition: background .25s, width .35s var(--ease); }
+.banner-dots button[aria-selected="true"] { width: 30px; border-radius: 999px; background: var(--cream); }
+@media (max-width: 620px) {
+  .banner { height: clamp(300px, 52vh, 420px); }
+  .banner-arrow { width: 40px; height: 40px; }
+  .banner-slide figcaption { padding-inline: 56px; }
+}
 .hero-grid {
   display: grid; grid-template-columns: 1.02fr 1fr;
   gap: clamp(36px, 5vw, 80px);

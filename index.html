@@ -97,6 +97,30 @@
 
 <main id="main">
 
+  <!-- ============ BANNER ============ -->
+  <section class="banner" aria-roledescription="carousel" aria-label="Puffin highlights">
+    <div class="banner-track">
+      <figure class="banner-slide is-active" aria-roledescription="slide" aria-label="1 of 3">
+        <img src="images/banner-1.webp" width="1280" height="960" alt="A dog eating from a bowl next to a bag of Puffin Premium Dog Food" style="object-position:50% 60%">
+        <figcaption><span>Nutrition they'll love.</span></figcaption>
+      </figure>
+      <figure class="banner-slide" aria-roledescription="slide" aria-label="2 of 3">
+        <img src="images/banner-2.webp" width="1280" height="960" alt="A golden retriever out for a walk on a leash" loading="lazy" style="object-position:50% 40%">
+        <figcaption><span>Every walk, every day.</span></figcaption>
+      </figure>
+      <figure class="banner-slide banner-slide--plain" aria-roledescription="slide" aria-label="3 of 3">
+        <img src="images/banner-3.webp" width="1600" height="901" alt="A woman cuddling her cat beside a phone showing the Puffin app" loading="lazy">
+      </figure>
+    </div>
+    <button class="banner-arrow banner-prev" type="button" aria-label="Previous slide"><svg><use href="#i-arrow"/></svg></button>
+    <button class="banner-arrow banner-next" type="button" aria-label="Next slide"><svg><use href="#i-arrow"/></svg></button>
+    <div class="banner-dots" role="tablist" aria-label="Choose slide">
+      <button type="button" role="tab" aria-label="Slide 1" aria-selected="true"></button>
+      <button type="button" role="tab" aria-label="Slide 2" aria-selected="false"></button>
+      <button type="button" role="tab" aria-label="Slide 3" aria-selected="false"></button>
+    </div>
+  </section>
+
   <!-- ============ HERO ============ -->
   <section class="hero" id="top">
     <div class="container hero-grid">

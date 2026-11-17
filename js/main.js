@@ -73,6 +73,39 @@
     }, 2200);
   }
 
+  /* ---------- Banner carousel ---------- */
+  const banner = document.querySelector('.banner');
+  if (banner) {
+    const slides = [...banner.querySelectorAll('.banner-slide')];
+    const dots = [...banner.querySelectorAll('.banner-dots button')];
+    let cur = 0;
+    let timer;
+    const go = (n) => {
+      cur = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => {
+        s.classList.toggle('is-active', i === cur);
+        s.querySelector('img').loading = 'eager';
+      });
+      dots.forEach((d, i) => d.setAttribute('aria-selected', String(i === cur)));
+    };
+    const stop = () => clearInterval(timer);
+    const play = () => { stop(); if (!reduceMotion) timer = setInterval(() => go(cur + 1), 6000); };
+    banner.querySelector('.banner-prev').addEventListener('click', () => { go(cur - 1); play(); });
+    banner.querySelector('.banner-next').addEventListener('click', () => { go(cur + 1); play(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { go(i); play(); }));
+    banner.addEventListener('mouseenter', stop);
+    banner.addEventListener('mouseleave', play);
+    let x0 = null;
+    banner.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    banner.addEventListener('touchend', (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) { go(cur + (dx < 0 ? 1 : -1)); play(); }
+      x0 = null;
+    });
+    play();
+  }
+
   /* ---------- FAQ accordion ---------- */
   const items = [...document.querySelectorAll('.faq-item')];
   items.forEach((item) => {
